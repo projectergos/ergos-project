@@ -106,10 +106,7 @@ function toggleMobileMenu(abrir) {
 
 
 
-// Copiado de Instagram
-function copiarInstagram(btn) {
-  copiarTextoUniversal("@ergosproject", btn, "¡Usuario copiado!");
-}
+
 
 // Función universal de copiado con fallback
 function copiarTextoUniversal(texto, elemento, mensajeExito) {
