@@ -16,6 +16,8 @@ function showSection(sectionId) {
   const mBtnQuienes = document.getElementById('m-btn-quienes');
   const mBtnServicios = document.getElementById('m-btn-servicios');
 
+  if (!viewInicio || !viewQuienes || !viewServicios) return;
+
   // Ocultar todas las vistas
   viewInicio.classList.add('hidden');
   viewQuienes.classList.add('hidden');
@@ -24,7 +26,7 @@ function showSection(sectionId) {
   // Resetear estados de escritorio
   [btnInicio, btnQuienes, btnServicios].forEach(btn => {
     if (btn) {
-      btn.classList.remove('bg-gray-100', 'text-gray-900');
+      btn.classList.remove('bg-gray-100', 'text-gray-900', 'active');
       btn.classList.add('text-gray-600');
     }
   });
@@ -32,36 +34,23 @@ function showSection(sectionId) {
   // Resetear estados móviles
   [mBtnInicio, mBtnQuienes, mBtnServicios].forEach(btn => {
     if (btn) {
-      btn.classList.remove('bg-gray-100', 'text-gray-900');
-      btn.classList.add('text-gray-600');
+      btn.classList.remove('active');
     }
   });
 
   // Activar la vista correspondiente
   if (sectionId === 'quienes-somos') {
     viewQuienes.classList.remove('hidden');
-    btnQuienes.classList.add('bg-gray-100', 'text-gray-900');
-    btnQuienes.classList.remove('text-gray-600');
-    if (mBtnQuienes) {
-      mBtnQuienes.classList.add('bg-gray-100', 'text-gray-900');
-      mBtnQuienes.classList.remove('text-gray-600');
-    }
+    if (btnQuienes) btnQuienes.classList.add('bg-gray-100', 'text-gray-900', 'active');
+    if (mBtnQuienes) mBtnQuienes.classList.add('active');
   } else if (sectionId === 'servicios') {
     viewServicios.classList.remove('hidden');
-    btnServicios.classList.add('bg-gray-100', 'text-gray-900');
-    btnServicios.classList.remove('text-gray-600');
-    if (mBtnServicios) {
-      mBtnServicios.classList.add('bg-gray-100', 'text-gray-900');
-      mBtnServicios.classList.remove('text-gray-600');
-    }
+    if (btnServicios) btnServicios.classList.add('bg-gray-100', 'text-gray-900', 'active');
+    if (mBtnServicios) mBtnServicios.classList.add('active');
   } else {
     viewInicio.classList.remove('hidden');
-    btnInicio.classList.add('bg-gray-100', 'text-gray-900');
-    btnInicio.classList.remove('text-gray-600');
-    if (mBtnInicio) {
-      mBtnInicio.classList.add('bg-gray-100', 'text-gray-900');
-      mBtnInicio.classList.remove('text-gray-600');
-    }
+    if (btnInicio) btnInicio.classList.add('bg-gray-100', 'text-gray-900', 'active');
+    if (mBtnInicio) mBtnInicio.classList.add('active');
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -70,7 +59,7 @@ function showSection(sectionId) {
 // Desplazamiento a canales de colaboración
 function irAColaboracion() {
   const viewInicio = document.getElementById('view-inicio');
-  if (viewInicio.classList.contains('hidden')) {
+  if (viewInicio && viewInicio.classList.contains('hidden')) {
     showSection('inicio');
   }
   setTimeout(() => {
@@ -81,73 +70,18 @@ function irAColaboracion() {
   }, 80);
 }
 
-// Control del menú lateral en móviles (100% nativo y confiable)
+// Control del menú lateral en móviles
 function toggleMobileMenu(abrir) {
   const container = document.getElementById('drawer-container');
   if (!container) return;
 
   if (abrir) {
     container.classList.add('is-open');
-    document.body.style.overflow = 'hidden'; // Evita scroll de fondo al abrir menú
+    document.body.style.overflow = 'hidden';
   } else {
     container.classList.remove('is-open');
     document.body.style.overflow = '';
   }
-} else {
-    backdrop.classList.remove('opacity-100');
-    backdrop.classList.add('opacity-0');
-    drawer.classList.remove('translate-x-0');
-    drawer.classList.add('translate-x-full');
-    setTimeout(() => {
-      container.classList.add('pointer-events-none');
-    }, 300);
-  }
-}
-
-
-
-
-
-// Función universal de copiado con fallback
-function copiarTextoUniversal(texto, elemento, mensajeExito) {
-  const textoOriginal = elemento.innerHTML;
-  
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(texto).then(() => {
-      mostrarFeedback(elemento, textoOriginal, mensajeExito);
-    }).catch(() => {
-      fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
-    });
-  } else {
-    fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
-  }
-}
-
-function fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito) {
-  try {
-    const areaTemp = document.createElement("textarea");
-    areaTemp.value = texto;
-    areaTemp.style.position = "fixed";
-    areaTemp.style.left = "-9999px";
-    areaTemp.style.top = "0";
-    document.body.appendChild(areaTemp);
-    areaTemp.focus();
-    areaTemp.select();
-    document.execCommand('copy');
-    document.body.removeChild(areaTemp);
-    mostrarFeedback(elemento, textoOriginal, mensajeExito);
-  } catch (err) {
-    alert("Información:\n" + texto);
-  }
-}
-
-function mostrarFeedback(elemento, originalHTML, mensaje) {
-  elemento.innerHTML = `<i class="fa-solid fa-check mr-2"></i>${mensaje}`;
-  elemento.classList.add('bg-emerald-600');
-  setTimeout(() => {
-    elemento.innerHTML = originalHTML;
-    elemento.classList.remove('bg-emerald-600');
-  }, 2200);
 }
 
 // Sincronización transparente en segundo plano (Zero-flicker & Anti-bloqueo)
@@ -161,7 +95,7 @@ async function sincronizarCifrasRecaudacion() {
 
   if (!elRec || !elInv || !elDisp) return;
 
-  // Cargar inmediatamente desde caché si existe (0 milisegundos de espera)
+  // Cargar inmediatamente desde caché si existe (0 milisegundos)
   try {
     const cached = JSON.parse(localStorage.getItem('ergos_cifras_cache') || 'null');
     if (cached) {
@@ -171,13 +105,13 @@ async function sincronizarCifrasRecaudacion() {
     }
   } catch(e) {}
 
-  // Consulta en segundo plano con límite de tiempo de 3 segundos
+  // Consulta en segundo plano con límite de tiempo de 3.5 segundos
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3500);
 
     let csvText = null;
-    
+
     // Intento 1: URL publicada
     try {
       const res = await fetch(SHEET_CSV_URL, { signal: controller.signal, cache: 'no-cache' });
@@ -194,7 +128,7 @@ async function sincronizarCifrasRecaudacion() {
 
     clearTimeout(timeoutId);
 
-    if (!csvText) return; // Si Google bloquea por exceso de recargas, mantiene los valores actuales sin romper nada
+    if (!csvText) return;
 
     const rows = parseCSV(csvText);
     if (rows.length < 2) return;
@@ -237,7 +171,7 @@ async function sincronizarCifrasRecaudacion() {
       }
     }
   } catch(e) {
-    // Falla silenciosa: nunca muestra "Cargando...", mantiene siempre las cifras reales
+    // Falla silenciosa: mantiene valores vigentes
   }
 }
 
