@@ -157,77 +157,94 @@ function mostrarFeedback(elemento, originalHTML, mensaje) {
   }, 2200);
 }
 
-// Sincronización en tiempo real desde Google Sheets (con multi-endpoint para 0 latencia)
-const SHEET_PUB_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR1ikLUsI2BQIuZy8TX8B_vdrjNxMCX_QJoEb64ggNQLDMneQzPFj2syzQQo5SO7wJh1qU-QNZZNDEv/pub?gid=0&single=true&output=csv";
+// Sincronización transparente en segundo plano (Zero-flicker & Anti-bloqueo)
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR1ikLUsI2BQIuZy8TX8B_vdrjNxMCX_QJoEb64ggNQLDMneQzPFj2syzQQo5SO7wJh1qU-QNZZNDEv/pub?gid=0&single=true&output=csv";
 const SHEET_GVIZ_URL = "https://docs.google.com/spreadsheets/d/1BLJJaoYRZSuFmsMlM6fCOWwi_tjFhtKGDzfZ6i-gbgY/gviz/tq?tqx=out:csv";
 
 async function sincronizarCifrasRecaudacion() {
-  const elRecaudado = document.getElementById('stat-recaudado');
-  const elInvertido = document.getElementById('stat-invertido');
-  const elDisponible = document.getElementById('stat-disponible');
+  const elRec = document.getElementById('stat-recaudado');
+  const elInv = document.getElementById('stat-invertido');
+  const elDisp = document.getElementById('stat-disponible');
 
-  if (!elRecaudado || !elInvertido || !elDisponible) return;
+  if (!elRec || !elInv || !elDisp) return;
 
-  // Intentar primero con el endpoint GViz (actualización en 0 segundos)
-  let csvText = await obtenerCSV(SHEET_GVIZ_URL);
-  
-  // Si no responde o requiere permisos, intentar con el enlace publicado
-  if (!csvText) {
-    csvText = await obtenerCSV(SHEET_PUB_URL);
-  }
-
-  if (!csvText) {
-    console.log("No se pudo obtener el CSV de ninguno de los endpoints.");
-    return;
-  }
-
-  const rows = parseCSV(csvText);
-  if (rows.length < 2) return;
-
-  // Localizar fila de cabecera con DISPONIBLE, INVERTIDO, RECAUDADO
-  let headerRowIdx = -1;
-  let colRecaudado = -1;
-  let colInvertido = -1;
-  let colDisponible = -1;
-
-  for (let r = 0; r < rows.length; r++) {
-    const row = rows[r].map(c => c.toUpperCase().trim());
-    const idxDisp = row.lastIndexOf('DISPONIBLE');
-    if (idxDisp !== -1) {
-      headerRowIdx = r;
-      colDisponible = idxDisp;
-      colInvertido = row.lastIndexOf('INVERTIDO');
-      colRecaudado = row.lastIndexOf('RECAUDADO');
-      break;
+  // Cargar inmediatamente desde caché si existe (0 milisegundos de espera)
+  try {
+    const cached = JSON.parse(localStorage.getItem('ergos_cifras_cache') || 'null');
+    if (cached) {
+      if (cached.rec) elRec.textContent = cached.rec;
+      if (cached.inv) elInv.textContent = cached.inv;
+      if (cached.disp) elDisp.textContent = cached.disp;
     }
-  }
+  } catch(e) {}
 
-  if (headerRowIdx !== -1 && colDisponible !== -1) {
-    // Tomar la última fila con valores
-    for (let r = rows.length - 1; r > headerRowIdx; r--) {
-      const row = rows[r];
-      const valDisp = row[colDisponible]?.trim();
-      const valInv = row[colInvertido]?.trim();
-      const valRec = row[colRecaudado]?.trim();
+  // Consulta en segundo plano con límite de tiempo de 3 segundos
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
 
-      if (valDisp || valRec) {
-        if (valRec) elRecaudado.textContent = formatearMonto(valRec);
-        if (valInv) elInvertido.textContent = formatearMonto(valInv);
-        if (valDisp) elDisponible.textContent = formatearMonto(valDisp);
-        console.log("Cifras actualizadas con éxito:", { valRec, valInv, valDisp });
+    let csvText = null;
+    
+    // Intento 1: URL publicada
+    try {
+      const res = await fetch(SHEET_CSV_URL, { signal: controller.signal, cache: 'no-cache' });
+      if (res.ok) csvText = await res.text();
+    } catch(err) {}
+
+    // Intento 2: GViz API si falló el primero
+    if (!csvText) {
+      try {
+        const res2 = await fetch(SHEET_GVIZ_URL, { signal: controller.signal, cache: 'no-cache' });
+        if (res2.ok) csvText = await res2.text();
+      } catch(err) {}
+    }
+
+    clearTimeout(timeoutId);
+
+    if (!csvText) return; // Si Google bloquea por exceso de recargas, mantiene los valores actuales sin romper nada
+
+    const rows = parseCSV(csvText);
+    if (rows.length < 2) return;
+
+    let headerIdx = -1, cRec = -1, cInv = -1, cDisp = -1;
+
+    for (let r = 0; r < rows.length; r++) {
+      const row = rows[r].map(c => (c || '').toUpperCase().trim());
+      const idx = row.lastIndexOf('DISPONIBLE');
+      if (idx !== -1) {
+        headerIdx = r;
+        cDisp = idx;
+        cInv = row.lastIndexOf('INVERTIDO');
+        cRec = row.lastIndexOf('RECAUDADO');
         break;
       }
     }
-  }
-}
 
-async function obtenerCSV(url) {
-  try {
-    const res = await fetch(url + (url.includes('?') ? '&' : '?') + '_nocache=' + Date.now());
-    if (!res.ok) return null;
-    return await res.text();
-  } catch (e) {
-    return null;
+    if (headerIdx !== -1 && cDisp !== -1) {
+      for (let r = rows.length - 1; r > headerIdx; r--) {
+        const row = rows[r];
+        const vDisp = row[cDisp]?.trim();
+        const vInv = row[cInv]?.trim();
+        const vRec = row[cRec]?.trim();
+
+        if (vDisp || vRec) {
+          const nRec = formatearMonto(vRec || '');
+          const nInv = formatearMonto(vInv || '');
+          const nDisp = formatearMonto(vDisp || '');
+
+          if (nRec && elRec.textContent !== nRec) elRec.textContent = nRec;
+          if (nInv && elInv.textContent !== nInv) elInv.textContent = nInv;
+          if (nDisp && elDisp.textContent !== nDisp) elDisp.textContent = nDisp;
+
+          try {
+            localStorage.setItem('ergos_cifras_cache', JSON.stringify({ rec: nRec, inv: nInv, disp: nDisp }));
+          } catch(e) {}
+          break;
+        }
+      }
+    }
+  } catch(e) {
+    // Falla silenciosa: nunca muestra "Cargando...", mantiene siempre las cifras reales
   }
 }
 

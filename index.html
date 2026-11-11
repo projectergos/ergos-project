@@ -131,20 +131,33 @@
     <section class="container-narrow">
       <div class="recaudacion-card">
         <h2 class="recaudacion-header">Estado de Recaudación</h2>
-        <div class="recaudacion-grid">
+                <div class="recaudacion-grid">
           <div class="recaudacion-col">
-            <span id="stat-recaudado" class="stat-number emerald">198,00€</span>
+            <span id="stat-recaudado" class="stat-number emerald stat-animated">198,00€</span>
             <span class="stat-label">Recaudado hasta el momento</span>
           </div>
           <div class="recaudacion-col">
-            <span id="stat-invertido" class="stat-number bronze">196,28€</span>
+            <span id="stat-invertido" class="stat-number bronze stat-animated">196,28€</span>
             <span class="stat-label">Invertido en Insumos</span>
           </div>
           <div class="recaudacion-col">
-            <span id="stat-disponible" class="stat-number dark">1,72€</span>
+            <span id="stat-disponible" class="stat-number dark stat-animated">1,72€</span>
             <span class="stat-label">Fondo Disponible</span>
           </div>
         </div>
+        <script>
+          // Inyección inmediata antes del pintado para eliminar cualquier parpadeo
+          (function() {
+            try {
+              var c = JSON.parse(localStorage.getItem('ergos_cifras_cache'));
+              if (c) {
+                if (c.rec) document.getElementById('stat-recaudado').textContent = c.rec;
+                if (c.inv) document.getElementById('stat-invertido').textContent = c.inv;
+                if (c.disp) document.getElementById('stat-disponible').textContent = c.disp;
+              }
+            } catch(e) {}
+          })();
+        </script>
       </div>
     </section>
 
