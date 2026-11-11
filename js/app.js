@@ -104,20 +104,7 @@ function toggleMobileMenu(abrir) {
   }
 }
 
-// Copiado de datos de pago (Formato estándar bancario venezolano compatible con auto-pegado tipo Cashea)
-function copiarDatosPago(btn) {
-  // Las aplicaciones bancarias (BDV, Banesco, Mercantil, Bancamiga, etc.) exigen:
-  // 1. Código numérico de 4 dígitos (0105)
-  // 2. Prefijo V/J y Cédula sin puntos
-  // 3. Teléfono de 11 dígitos continuos sin guiones
-  const datos = "Banco: 0105 - Banco Mercantil\nCédula: V30682297\nTeléfono: 04128829844";
-  copiarTextoUniversal(datos, btn, "¡Datos de Pago Móvil copiados!");
-}
 
-// Copiado individual de campos rápidos
-function copiarCampoIndividual(texto, btn, nombreCampo) {
-  copiarTextoUniversal(texto, btn, `¡${nombreCampo} copiado!`);
-}
 
 // Copiado de Instagram
 function copiarInstagram(btn) {
