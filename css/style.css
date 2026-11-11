@@ -141,7 +141,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .nav-desktop {
