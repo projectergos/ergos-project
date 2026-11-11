@@ -13,100 +13,95 @@
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Tailwind CSS Engine -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Estilos Personalizados Separados -->
+  <!-- Hoja de Estilos Autónoma y Completa -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans flex flex-col min-h-screen selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden">
+<body>
 
   <!-- ==================== ENCABEZADO / NAVBAR ==================== -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+  <header class="site-header">
+    <div class="container-custom nav-wrapper">
       
       <!-- Identidad de Marca -->
-      <a href="#" onclick="showSection('inicio'); return false;" class="flex items-center gap-3 group shrink-0">
-        <img src="logo.png" alt="Ergos Project" class="w-10 h-10 object-contain rounded-xl shadow-sm group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.parentElement.querySelector('.fallback-logo').classList.remove('hidden'); this.classList.add('hidden');">
-        <div class="fallback-logo hidden w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-white font-black text-xl shadow-sm tracking-wider group-hover:scale-105 transition-transform">
-          E
-        </div>
+      <a href="#" onclick="showSection('inicio'); return false;" class="brand-link">
+        <img src="logo.png" alt="Ergos Project" class="brand-img" onerror="this.onerror=null; this.parentElement.querySelector('.brand-avatar').classList.remove('hidden'); this.classList.add('hidden');">
+        <div class="brand-avatar hidden">E</div>
         <div>
-          <span class="block text-base sm:text-lg font-bold tracking-tight text-gray-900 leading-tight">ERGOS PROJECT</span>
-          <span class="block text-[11px] font-medium text-gray-500 uppercase tracking-widest">Iniciativa Estudiantil</span>
+          <span class="brand-title block">ERGOS PROJECT</span>
+          <span class="brand-sub block">Iniciativa Estudiantil</span>
         </div>
       </a>
 
-      <!-- Menú Escritorio (Visible en md en adelante) -->
-      <nav class="hidden md:flex items-center gap-2 lg:gap-3">
-        <button onclick="showSection('inicio')" id="btn-nav-inicio" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-gray-100 text-gray-900 transition-colors">
-          <i class="fa-solid fa-house mr-1.5 text-xs"></i>Inicio
+      <!-- Menú Escritorio -->
+      <nav class="nav-desktop">
+        <button onclick="showSection('inicio')" id="btn-nav-inicio" class="nav-btn active">
+          <i class="fa-solid fa-house" style="margin-right: 0.35rem; font-size: 0.8rem;"></i>Inicio
         </button>
-        <button onclick="showSection('quienes-somos')" id="btn-nav-quienes" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-          <i class="fa-solid fa-users mr-1.5 text-xs"></i>¿Quiénes somos?
+        <button onclick="showSection('quienes-somos')" id="btn-nav-quienes" class="nav-btn">
+          <i class="fa-solid fa-users" style="margin-right: 0.35rem; font-size: 0.8rem;"></i>¿Quiénes somos?
         </button>
-        <button onclick="showSection('servicios')" id="btn-nav-servicios" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-          <i class="fa-solid fa-screwdriver-wrench mr-1.5 text-xs"></i>Servicios
+        <button onclick="showSection('servicios')" id="btn-nav-servicios" class="nav-btn">
+          <i class="fa-solid fa-screwdriver-wrench" style="margin-right: 0.35rem; font-size: 0.8rem;"></i>Servicios
         </button>
 
-        <div class="h-4 w-px bg-gray-300 mx-2"></div>
+        <div class="nav-divider"></div>
 
-        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="p-2 text-gray-500 hover:text-pink-600 transition-colors" title="Instagram">
-          <i class="fa-brands fa-instagram text-lg"></i>
+        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="nav-social-btn insta" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="mailto:projectergos@gmail.com" class="p-2 text-gray-500 hover:text-amber-700 transition-colors" title="Correo">
-          <i class="fa-regular fa-envelope text-lg"></i>
+        <a href="mailto:projectergos@gmail.com" class="nav-social-btn email" title="Correo">
+          <i class="fa-regular fa-envelope"></i>
         </a>
       </nav>
 
-      <!-- Botón Hamburguesa Móvil -->
-      <button onclick="toggleMobileMenu(true)" class="md:hidden p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
-        <i class="fa-solid fa-bars text-xl"></i>
+      <!-- Botón Menú Móvil -->
+      <button onclick="toggleMobileMenu(true)" class="hamburger-btn" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
       </button>
 
     </div>
   </header>
 
   <!-- Barra Lateral Móvil (Drawer) -->
-  <div id="drawer-container" class="fixed inset-0 z-50 pointer-events-none md:hidden">
-    <div id="drawer-backdrop" onclick="toggleMobileMenu(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs opacity-0 transition-opacity"></div>
+  <div id="drawer-container" class="drawer-container pointer-events-none">
+    <div id="drawer-backdrop" onclick="toggleMobileMenu(false)" class="drawer-backdrop"></div>
     
-    <aside id="mobile-drawer" class="absolute top-0 right-0 w-72 max-w-[80vw] h-full bg-white shadow-2xl p-6 flex flex-col justify-between translate-x-full transition-transform duration-300 pointer-events-auto">
+    <aside id="mobile-drawer" class="mobile-drawer">
       <div>
-        <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
-          <span class="font-bold text-gray-900 text-sm tracking-wide">MENÚ</span>
-          <button onclick="toggleMobileMenu(false)" class="p-2 text-gray-400 hover:text-gray-700 rounded-lg" aria-label="Cerrar menú">
-            <i class="fa-solid fa-xmark text-lg"></i>
+        <div class="drawer-header">
+          <span class="drawer-header-title">MENÚ</span>
+          <button onclick="toggleMobileMenu(false)" class="drawer-close-btn" aria-label="Cerrar menú">
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
 
-        <nav class="space-y-2">
-          <button onclick="showSection('inicio'); toggleMobileMenu(false);" id="m-btn-inicio" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-900 bg-gray-100 flex items-center justify-between">
-            <span class="flex items-center gap-2.5"><i class="fa-solid fa-house text-gray-500 text-xs"></i>Inicio</span>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
+        <nav class="drawer-nav">
+          <button onclick="showSection('inicio'); toggleMobileMenu(false);" id="m-btn-inicio" class="drawer-nav-item active">
+            <span class="flex-item"><i class="fa-solid fa-house"></i>Inicio</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
           </button>
-          <button onclick="showSection('quienes-somos'); toggleMobileMenu(false);" id="m-btn-quienes" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span class="flex items-center gap-2.5"><i class="fa-solid fa-users text-gray-500 text-xs"></i>¿Quiénes somos?</span>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
+          <button onclick="showSection('quienes-somos'); toggleMobileMenu(false);" id="m-btn-quienes" class="drawer-nav-item">
+            <span class="flex-item"><i class="fa-solid fa-users"></i>¿Quiénes somos?</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
           </button>
-          <button onclick="showSection('servicios'); toggleMobileMenu(false);" id="m-btn-servicios" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span class="flex items-center gap-2.5"><i class="fa-solid fa-screwdriver-wrench text-gray-500 text-xs"></i>Servicios</span>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
+          <button onclick="showSection('servicios'); toggleMobileMenu(false);" id="m-btn-servicios" class="drawer-nav-item">
+            <span class="flex-item"><i class="fa-solid fa-screwdriver-wrench"></i>Servicios</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
           </button>
-          <button onclick="irAColaboracion(); toggleMobileMenu(false);" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span class="flex items-center gap-2.5"><i class="fa-solid fa-hand-holding-dollar text-gray-500 text-xs"></i>Canales de Colaboración</span>
-            <i class="fa-solid fa-arrow-down text-gray-300 text-xs"></i>
+          <button onclick="irAColaboracion(); toggleMobileMenu(false);" class="drawer-nav-item">
+            <span class="flex-item"><i class="fa-solid fa-hand-holding-dollar"></i>Canales de Colaboración</span>
+            <i class="fa-solid fa-arrow-down arrow-icon"></i>
           </button>
         </nav>
       </div>
 
-      <div class="pt-6 border-t border-gray-100 space-y-3">
-        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 bg-pink-50 text-pink-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
-          <i class="fa-brands fa-instagram text-base"></i>
+      <div class="drawer-footer">
+        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="drawer-social-btn insta">
+          <i class="fa-brands fa-instagram"></i>
           <span>Instagram @ergosproject</span>
         </a>
-        <a href="mailto:projectergos@gmail.com" class="w-full py-2.5 px-3 bg-gray-100 text-gray-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
-          <i class="fa-regular fa-envelope text-base"></i>
+        <a href="mailto:projectergos@gmail.com" class="drawer-social-btn email">
+          <i class="fa-regular fa-envelope"></i>
           <span>projectergos@gmail.com</span>
         </a>
       </div>
@@ -114,137 +109,127 @@
   </div>
 
   <!-- ==================== VISTA PRINCIPAL (INICIO) ==================== -->
-  <main id="view-inicio" class="flex-grow w-full">
+  <main id="view-inicio" class="flex-grow">
     
-    <!-- Hero Principal -->
-    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-12 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold mb-6 border border-amber-200">
-        <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
-        Escuela de Ingeniería Industrial • Universidad de Carabobo
-      </div>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight mb-4 sm:mb-6">
+    <!-- Hero Principal (Mensaje previo eliminado) -->
+    <section class="container-narrow hero-section">
+      <h1 class="hero-title">
         Recuperación y optimización de espacios académicos
       </h1>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-        Iniciativa de autogestión estudiantil enfocada en renovar la infraestructura, aulas y laboratorios tras las afectaciones del sismo del 24 de junio.
+      <p class="hero-desc">
+        Iniciativa de autogestión estudiantil enfocada en renovar la infraestructura, aulas y laboratorios de la Escuela de Ingeniería Industrial.
       </p>
       <div>
-        <button onclick="irAColaboracion()" class="px-7 sm:px-8 py-3.5 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer inline-flex items-center gap-2">
+        <button onclick="irAColaboracion()" class="btn-primary">
           <span>Ver canales de colaboración</span>
-          <i class="fa-solid fa-arrow-down text-xs"></i>
+          <i class="fa-solid fa-arrow-down" style="font-size: 0.75rem;"></i>
         </button>
       </div>
     </section>
 
     <!-- Estado de Recaudación -->
-    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
-      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:p-10">
-        <h2 class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-6 text-center">Estado de Recaudación</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
-          <div class="pt-4 sm:pt-0">
-            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 mb-1">$450</span>
-            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Recaudado hasta el momento</span>
+    <section class="container-narrow">
+      <div class="recaudacion-card">
+        <h2 class="recaudacion-header">Estado de Recaudación</h2>
+        <div class="recaudacion-grid">
+          <div class="recaudacion-col">
+            <span class="stat-number emerald">$450</span>
+            <span class="stat-label">Recaudado hasta el momento</span>
           </div>
-          <div class="pt-4 sm:pt-0">
-            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-amber-700 mb-1">$180</span>
-            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Invertido en Insumos</span>
+          <div class="recaudacion-col">
+            <span class="stat-number bronze">$180</span>
+            <span class="stat-label">Invertido en Insumos</span>
           </div>
-          <div class="pt-4 sm:pt-0">
-            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-1">$270</span>
-            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Fondo Disponible</span>
+          <div class="recaudacion-col">
+            <span class="stat-number dark">$270</span>
+            <span class="stat-label">Fondo Disponible</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Diagnóstico Operativo (Siempre 3 columnas en PC) -->
-    <section class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight text-center mb-8 sm:mb-12">
-        Diagnóstico Operativo
-      </h2>
+    <section class="container-custom">
+      <h2 class="section-title">Diagnóstico Operativo</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="diag-grid">
         <!-- Card 1 -->
-        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+        <div class="card-diag">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-4">
-              <i class="fa-solid fa-cloud-rain text-lg"></i>
+            <div class="diag-icon-box diag-icon-blue">
+              <i class="fa-solid fa-cloud-rain"></i>
             </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Impermeabilización</h3>
-            <div class="mb-4">
-              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
-              <p class="text-sm text-gray-600 leading-relaxed">Filtraciones activas en losas superiores y acumulación de humedad en paredes perimetrales.</p>
+            <h3 class="diag-card-title">Impermeabilización</h3>
+            <div>
+              <span class="diag-tag-actual">Estado Actual</span>
+              <p class="diag-text-actual">Filtraciones activas en losas superiores y acumulación de humedad en paredes perimetrales.</p>
             </div>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
-            <p class="text-sm font-medium text-gray-800 leading-relaxed">Saneamiento de superficies y aplicación de manto asfáltico sellador de alta durabilidad.</p>
+          <div class="diag-footer">
+            <span class="badge-deseado">Estado Deseado</span>
+            <p class="diag-text-deseado">Saneamiento de superficies y aplicación de manto asfáltico sellador de alta durabilidad.</p>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+        <div class="card-diag">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-4">
-              <i class="fa-solid fa-paint-roller text-lg"></i>
+            <div class="diag-icon-box diag-icon-amber">
+              <i class="fa-solid fa-paint-roller"></i>
             </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Mobiliario y Pintura</h3>
-            <div class="mb-4">
-              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
-              <p class="text-sm text-gray-600 leading-relaxed">Desgaste superficial generalizado en paredes y pupitres con fijaciones desajustadas.</p>
+            <h3 class="diag-card-title">Mobiliario y Pintura</h3>
+            <div>
+              <span class="diag-tag-actual">Estado Actual</span>
+              <p class="diag-text-actual">Desgaste superficial generalizado en paredes y pupitres con fijaciones desajustadas.</p>
             </div>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
-            <p class="text-sm font-medium text-gray-800 leading-relaxed">Restauración integral, fijación estructural y aplicación de pintura.</p>
+          <div class="diag-footer">
+            <span class="badge-deseado">Estado Deseado</span>
+            <p class="diag-text-deseado">Restauración integral, fijación estructural y aplicación de pintura.</p>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+        <div class="card-diag">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center mb-4">
-              <i class="fa-solid fa-snowflake text-lg"></i>
+            <div class="diag-icon-box diag-icon-cyan">
+              <i class="fa-solid fa-snowflake"></i>
             </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Climatización</h3>
-            <div class="mb-4">
-              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
-              <p class="text-sm text-gray-600 leading-relaxed">Unidades de A/A actualmente inactivas y áreas de estudio sin refrigeración adecuada.</p>
+            <h3 class="diag-card-title">Climatización</h3>
+            <div>
+              <span class="diag-tag-actual">Estado Actual</span>
+              <p class="diag-text-actual">Unidades de A/A actualmente inactivas y áreas de estudio sin refrigeración adecuada.</p>
             </div>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
-            <p class="text-sm font-medium text-gray-800 leading-relaxed">Mantenimiento preventivo, recarga de refrigerante y reactivación funcional de unidades.</p>
+          <div class="diag-footer">
+            <span class="badge-deseado">Estado Deseado</span>
+            <p class="diag-text-deseado">Mantenimiento preventivo, recarga de refrigerante y reactivación funcional de unidades.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Bitácora de Avances -->
-    <section class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight text-center mb-10 sm:mb-14">
-        Bitácora de Avances
-      </h2>
+    <!-- Bitácora de Avances (Puntos centrados verticalmente) -->
+    <section class="container-narrow">
+      <h2 class="section-title">Bitácora de Avances</h2>
 
-      <div class="relative border-l-2 border-gray-200 ml-4 sm:ml-8 md:ml-12 space-y-8 sm:space-y-10">
+      <div class="timeline-wrapper">
         <!-- Hito 1 -->
-        <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-white"></div>
-          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">1-2 de Octubre • Completado</span>
-            </div>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Apertura</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+        <div class="timeline-node">
+          <div class="timeline-marker emerald"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge emerald">1-2 de Octubre • Completado</span>
+            <h3 class="timeline-title">Operación Apertura</h3>
+            <p class="timeline-desc">
               Limpieza y Pintura de los Salones SUM y LIO, Sanitarios del Dpto. de Gerencia e instalación de Cortinas y Ventiladores en el salón SUM.
             </p>
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <a href="https://www.instagram.com/reel/DeElWtaNesH/?cplk=aGdlMHh6ejN0Y2Jv" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-700 text-xs font-bold transition-colors">
-                <i class="fa-brands fa-instagram text-sm"></i>
+            <div class="timeline-btn-group">
+              <a href="https://www.instagram.com/reel/DeElWtaNesH/?cplk=aGdlMHh6ejN0Y2Jv" target="_blank" rel="noopener noreferrer" class="btn-pill insta">
+                <i class="fa-brands fa-instagram"></i>
                 <span>Ver resultados</span>
               </a>
-              <a href="https://drive.google.com/drive/folders/1rj3A_TCtZLZpS7AOn3l8Gz-JKaJvq22A?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition-colors">
-                <i class="fa-solid fa-folder-open text-sm text-amber-600"></i>
+              <a href="https://drive.google.com/drive/folders/1rj3A_TCtZLZpS7AOn3l8Gz-JKaJvq22A?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-pill drive">
+                <i class="fa-solid fa-folder-open" style="color: #d97706;"></i>
                 <span>Mayor Información</span>
               </a>
             </div>
@@ -252,24 +237,24 @@
         </div>
 
         <!-- Hito 2 -->
-        <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-amber-600 ring-4 ring-white"></div>
-          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
-            <span class="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-2">En Progreso</span>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 1)</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
+        <div class="timeline-node">
+          <div class="timeline-marker bronze"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge bronze">En Progreso</span>
+            <h3 class="timeline-title">Operación Humedad (Fase 1)</h3>
+            <p class="timeline-desc">
               Inspección exhaustiva de los techos para fijar materiales requeridos y su correspondiente cotización.
             </p>
           </div>
         </div>
 
         <!-- Hito 3 -->
-        <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
-          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm opacity-90">
-            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Siguiente Fase</span>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 2)</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
+        <div class="timeline-node">
+          <div class="timeline-marker gray"></div>
+          <div class="timeline-card" style="opacity: 0.92;">
+            <span class="timeline-badge gray">Siguiente Fase</span>
+            <h3 class="timeline-title">Operación Humedad (Fase 2)</h3>
+            <p class="timeline-desc">
               Recaudación de fondos para la compra de los materiales.
             </p>
           </div>
@@ -277,89 +262,122 @@
       </div>
     </section>
 
-    <!-- Canales de Colaboración -->
-    <section id="colaboracion" class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24 scroll-mt-24">
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 md:p-10 shadow-sm text-center">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Canales de Colaboración</h2>
-        <p class="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto leading-relaxed">
-          Toda contribución se destina exclusivamente a la adquisición transparente de insumos y materiales.
+    <!-- Canales de Colaboración (Información Completa y Estructurada) -->
+    <section id="colaboracion" class="container-narrow scroll-mt-24">
+      <div class="colaboracion-card">
+        <h2 class="colab-main-title">Canales de Colaboración</h2>
+        <p class="colab-main-desc">
+          Toda contribución se destina exclusivamente a la adquisición transparente de insumos y materiales para las aulas y laboratorios.
         </p>
 
-        <!-- Datos Bancarios -->
-        <div class="bg-gray-50 rounded-2xl p-5 sm:p-6 border border-gray-200 max-w-md mx-auto text-left mb-6 space-y-2.5 text-sm sm:text-base font-mono">
-          <p><span class="font-sans font-bold text-gray-500">Banco:</span> Mercantil</p>
-          <p><span class="font-sans font-bold text-gray-500">C.I.:</span> 30.682.297</p>
-          <p><span class="font-sans font-bold text-gray-500">Teléfono:</span> 0412-8829844</p>
-        </div>
+        <!-- Bloque 1: Pago Móvil -->
+        <div class="colab-method-card">
+          <div class="colab-method-header">
+            <i class="fa-solid fa-mobile-screen-button text-emerald"></i>
+            <div>
+              <h3 class="colab-method-title">Pago Móvil (Bolívares)</h3>
+              <p class="colab-method-sub">Aporte directo para la compra de materiales</p>
+            </div>
+          </div>
 
-        <button onclick="copiarDatosPago(this)" class="w-full max-w-md mx-auto py-3.5 px-6 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer block">
-          <i class="fa-regular fa-copy mr-2"></i>Copiar Datos de Pago
-        </button>
+          <div class="bank-info-box">
+            <p><strong>Banco:</strong> Mercantil (0105)</p>
+            <p><strong>C.I.:</strong> 30.682.297</p>
+            <p><strong>Teléfono:</strong> 0412-8829844</p>
+            <p><strong>Concepto:</strong> Aporte Ergos / Donación</p>
+          </div>
 
-        <!-- Separador -->
-        <div class="flex items-center my-6 max-w-md mx-auto">
-          <div class="flex-grow border-t border-gray-200"></div>
-          <span class="px-3 text-xs uppercase tracking-wider font-semibold text-gray-400">O contacta vía</span>
-          <div class="flex-grow border-t border-gray-200"></div>
-        </div>
-
-        <!-- Botón Instagram DM -->
-        <div class="max-w-md mx-auto space-y-2">
-          <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full min-h-[48px] px-4 py-3.5 bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:opacity-95 text-white font-bold text-sm sm:text-base rounded-xl transition-all shadow-sm flex items-center justify-center gap-3">
-            <i class="fa-brands fa-instagram text-xl shrink-0"></i>
-            <span class="text-center">Contactar al DM de Instagram (@ergosproject)</span>
-          </a>
-          <button onclick="copiarInstagram(this)" class="w-full text-xs text-gray-500 hover:text-gray-800 py-1.5 transition-colors cursor-pointer">
-            Copiar usuario de Instagram (@ergosproject)
+          <button onclick="copiarDatosPago(this)" class="btn-action-copy">
+            <i class="fa-regular fa-copy" style="margin-right: 0.4rem;"></i>Copiar Datos de Pago
           </button>
         </div>
+
+        <!-- Bloque 2: Donación de Materiales e Insumos en Físico -->
+        <div class="colab-method-card" style="margin-top: 1.5rem;">
+          <div class="colab-method-header">
+            <i class="fa-solid fa-box-open text-amber"></i>
+            <div>
+              <h3 class="colab-method-title">Donación de Insumos y Materiales</h3>
+              <p class="colab-method-sub">Aportes en físico coordinados directamente en la escuela</p>
+            </div>
+          </div>
+          <p class="colab-method-text">
+            Recibimos directamente insumos en buen estado: cuñetes o galones de pintura (blanca/azul), brochas, rodillos, espátulas, tiras de lija, cortineros, ventiladores y componentes eléctricos bajo acta formal de recepción.
+          </p>
+        </div>
+
+        <div class="or-divider">
+          <span>Contacto Directo y Reporte de Aportes</span>
+        </div>
+
+        <!-- Bloque 3: Canales de Contacto Directo -->
+        <div class="contact-grid">
+          <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="btn-insta-dm">
+            <i class="fa-brands fa-instagram" style="font-size: 1.25rem;"></i>
+            <span>DM Instagram (@ergosproject)</span>
+          </a>
+
+          <a href="https://wa.me/584123137486" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i>
+            <span>WhatsApp (0412-3137486)</span>
+          </a>
+        </div>
+
+        <div class="contact-sublinks">
+          <button onclick="copiarInstagram(this)" class="copy-user-text">
+            Copiar usuario de Instagram (@ergosproject)
+          </button>
+          <span style="color: #cbd5e1;">•</span>
+          <a href="mailto:projectergos@gmail.com" class="copy-user-text">
+            projectergos@gmail.com
+          </a>
+        </div>
+
       </div>
     </section>
   </main>
 
   <!-- ==================== VISTA ¿QUIÉNES SOMOS? ==================== -->
-  <main id="view-quienes-somos" class="flex-grow w-full hidden">
-    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
+  <main id="view-quienes-somos" class="flex-grow hidden">
+    <div class="container-narrow content-page">
       
-      <div class="text-center mb-10 sm:mb-14">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-          ¿Quiénes somos?
-        </h1>
+      <div class="page-title-box">
+        <h1 class="hero-title">¿Quiénes somos?</h1>
       </div>
 
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
-        <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
-          <strong class="text-gray-900">ERGOS PROJECT</strong> es una asociación de estudiantes sin fines de lucro que hacen vida dentro de la Escuela de Ingeniería Industrial, perteneciente a la Facultad de Ingeniería de la Universidad de Carabobo.
+      <div class="content-box">
+        <p class="text-body-lead">
+          <strong style="color: #0f172a;">ERGOS PROJECT</strong> es una asociación de estudiantes sin fines de lucro que hacen vida dentro de la Escuela de Ingeniería Industrial, perteneciente a la Facultad de Ingeniería de la Universidad de Carabobo.
         </p>
-        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+        <p class="text-body">
           Dicha iniciativa se considera importante debido a su compromiso de renovar y recuperar las áreas afectadas tras el terremoto del pasado 24 de junio. Como futuros ingenieros, buscamos aplicar nuestros conocimientos, gestión y trabajo en equipo para mejorar la infraestructura y devolver la funcionalidad y bienestar a nuestra cotidianidad. Estamos convencidos de que, con la solidaridad y el esfuerzo colectivo que se logre reunir, transformaremos esta adversidad en un impacto positivo y duradero.
         </p>
       </div>
 
-      <div class="mb-12 sm:mb-16">
-        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-2">ORDEN DE PRIORIDADES</h2>
-        <p class="text-sm sm:text-base text-gray-600 mb-8 leading-relaxed max-w-4xl">
+      <div class="section-block">
+        <h2 class="box-title">ORDEN DE PRIORIDADES</h2>
+        <p class="text-body" style="margin-bottom: 2rem;">
           Con base en nuestro alcance actual, se hace imposible abarcar todas las operaciones al mismo tiempo, en especial las más complejas (que requieren mayor inversión), por lo cual, se decidió priorizar y cumplir primero aquellas más “alcanzables” y de esa forma se espera obtener progresivamente la confianza del colectivo estudiantil de la escuela, para así poder planificar operaciones de mayor relevancia. El mencionado orden consta de tres (3) fases, con las operaciones planteadas hasta el momento:
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="diag-grid">
           <!-- Fase I -->
-          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div class="card-diag">
             <div>
-              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 rounded-md uppercase tracking-wider mb-3">Fase I</span>
-              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Higiene y Mantenimiento</h3>
-              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+              <span class="badge-phase emerald">Fase I</span>
+              <h3 class="diag-card-title">Higiene y Mantenimiento</h3>
+              <ol class="styled-list">
                 <li><strong>Operación Apertura:</strong> adecuación de superficies en sanitarios de la dirección de gerencia, y en los salones SUM y LIO. También, limpieza de áreas verdes de la EII.</li>
               </ol>
             </div>
           </div>
 
           <!-- Fase II -->
-          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div class="card-diag">
             <div>
-              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-3">Fase II</span>
-              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Impermeabilización y Remodelación</h3>
-              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+              <span class="badge-phase bronze">Fase II</span>
+              <h3 class="diag-card-title">Impermeabilización y Remodelación</h3>
+              <ol class="styled-list">
                 <li><strong>Operación Humedad:</strong> corrección de filtraciones en losa superior y saneamiento de humedad en paredes de aulas de clase.</li>
                 <li><strong>Operación Wireless:</strong> instalación de red WiFi en el pasillo principal de la EII.</li>
               </ol>
@@ -367,11 +385,11 @@
           </div>
 
           <!-- Fase III -->
-          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between md:col-span-2 lg:col-span-1">
+          <div class="card-diag">
             <div>
-              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-gray-500 bg-gray-100 rounded-md uppercase tracking-wider mb-3">Fase III</span>
-              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Recuperación y Transformación</h3>
-              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+              <span class="badge-phase gray">Fase III</span>
+              <h3 class="diag-card-title">Recuperación y Transformación</h3>
+              <ol class="styled-list">
                 <li><strong>Operación Lápiz y Papel:</strong> restauración de pupitres y/o mobiliario dentro de las aulas de clase de la EII.</li>
                 <li><strong>Operación Clima:</strong> climatización de los salones de clase con sistemas de aire acondicionado.</li>
                 <li><strong>Operación SIO:</strong> intervención profunda como mecanismo para contribuir a la reactivación de sus funciones de forma regular.</li>
@@ -382,9 +400,9 @@
       </div>
 
       <!-- Lineamientos -->
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
-        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-6">LINEAMIENTOS</h2>
-        <ol class="space-y-4 text-sm sm:text-base text-gray-700 list-decimal list-inside leading-relaxed">
+      <div class="content-box">
+        <h2 class="box-title">LINEAMIENTOS</h2>
+        <ol class="styled-list">
           <li>Ningún proyecto debe involucrar los servicios públicos tales como electricidad o agua. Por tanto, proyectos como la restauración de los baños ubicados al final del pasillo principal, quedan descartados.</li>
           <li>Para la gestión de los proyectos, lo inicial es realizar un diagnóstico en el área de estudio, luego solicitar (o realizar) una lista de materiales y por último empezar en la recaudación colectiva de fondos.</li>
           <li>Para la recaudación de los fondos, tener una cuenta bancaria cuyos únicos movimientos sean para los proyectos.</li>
@@ -399,9 +417,9 @@
       </div>
 
       <!-- Aspectos a Considerar -->
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
-        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-6">ASPECTOS A CONSIDERAR</h2>
-        <ol class="space-y-4 text-sm sm:text-base text-gray-700 list-decimal list-inside leading-relaxed">
+      <div class="content-box">
+        <h2 class="box-title">ASPECTOS A CONSIDERAR</h2>
+        <ol class="styled-list">
           <li><strong>ERGOS PROJECT</strong> es estrictamente una organización de estudiantes sin fines de lucro y sin fines políticos, que no tiene por objetivo ni formar, ni sustituir el centro de estudiantes dentro de la Escuela de Ingeniería Industrial.</li>
           <li>Para evitar conflictos legales, aclarar desde un primer momento que es una iniciativa de estudiantes, que cuenta con apoyo docente pero, no hace mención al colectivo docente en lo que se refiere a recaudaciones.</li>
           <li>Para realizar el enlace de los colaboradores primarios con los secundarios, idealmente se buscarán estudiantes que en representación de los semestres pertenecientes a la escuela, se encarguen de transmitir la idea y la confianza a los demás colaboradores, como estrategia para maximizar las donaciones.</li>
@@ -424,8 +442,8 @@
         </ol>
       </div>
 
-      <div class="text-center">
-        <button onclick="showSection('inicio')" class="px-7 py-3 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer">
+      <div style="text-align: center; margin-top: 3rem;">
+        <button onclick="showSection('inicio')" class="btn-primary">
           ← Volver a la página principal
         </button>
       </div>
@@ -434,98 +452,88 @@
   </main>
 
   <!-- ==================== VISTA SERVICIOS ==================== -->
-  <main id="view-servicios" class="flex-grow w-full hidden">
-    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
+  <main id="view-servicios" class="flex-grow hidden">
+    <div class="container-narrow content-page">
       
-      <div class="text-center mb-10 sm:mb-14">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-4">
-          Servicios y Gestión
-        </h1>
-        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      <div class="page-title-box">
+        <h1 class="hero-title">Servicios y Gestión</h1>
+        <p class="hero-desc">
           Áreas de intervención técnica, logística y operativa desarrolladas para la recuperación integral de la infraestructura académica.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
+      <div class="services-grid">
         <!-- Servicio 1 -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div class="service-card">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-lg mb-4">
-              01
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Diagnóstico Técnico y Levantamiento</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+            <div class="service-number amber">01</div>
+            <h3 class="diag-card-title">Diagnóstico Técnico y Levantamiento</h3>
+            <p class="diag-text-actual">
               Inspección estructural de aulas, laboratorios y áreas comunes para cuantificar daños por humedad, filtraciones y desgaste de mobiliario.
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
-            <span class="text-xs sm:text-sm text-gray-700 font-medium">Informe de daños y lista de materiales requeridos.</span>
+          <div class="diag-footer">
+            <span class="diag-tag-actual">Entregable</span>
+            <span class="diag-text-deseado">Informe de daños y lista de materiales requeridos.</span>
           </div>
         </div>
 
         <!-- Servicio 2 -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div class="service-card">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4">
-              02
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Gestión y Planificación de Operaciones</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+            <div class="service-number emerald">02</div>
+            <h3 class="diag-card-title">Gestión y Planificación de Operaciones</h3>
+            <p class="diag-text-actual">
               Elaboración de presupuestos, cronogramas de trabajo por fases y administración transparente de aportes económicos y donaciones de materiales.
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
-            <span class="text-xs sm:text-sm text-gray-700 font-medium">Hojas de balance, actas formales de entrega y facturación.</span>
+          <div class="diag-footer">
+            <span class="diag-tag-actual">Entregable</span>
+            <span class="diag-text-deseado">Hojas de balance, actas formales de entrega y facturación.</span>
           </div>
         </div>
 
         <!-- Servicio 3 -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div class="service-card">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-lg mb-4">
-              03
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Adecuación Ergonómica de Ambientes</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+            <div class="service-number blue">03</div>
+            <h3 class="diag-card-title">Adecuación Ergonómica de Ambientes</h3>
+            <p class="diag-text-actual">
               Acondicionamiento físico de espacios: pintura reflectiva antirreflejo, ventilación cruzada, instalación de cortinas y restauración estructural de pupitres.
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
-            <span class="text-xs sm:text-sm text-gray-700 font-medium">Espacios de estudio higiénicos, frescos y funcionales.</span>
+          <div class="diag-footer">
+            <span class="diag-tag-actual">Entregable</span>
+            <span class="diag-text-deseado">Espacios de estudio higiénicos, frescos y funcionales.</span>
           </div>
         </div>
 
         <!-- Servicio 4 -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div class="service-card">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-lg mb-4">
-              04
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Jornadas de Voluntariado Estudiantil</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+            <div class="service-number purple">04</div>
+            <h3 class="diag-card-title">Jornadas de Voluntariado Estudiantil</h3>
+            <p class="diag-text-actual">
               Coordinación y ejecución en campo de jornadas de limpieza profunda, lijado, pintura, fijaciones mecánicas y mantenimiento preventivo.
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100">
-            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
-            <span class="text-xs sm:text-sm text-gray-700 font-medium">Intervención directa con respaldo fotográfico y audiovisual.</span>
+          <div class="diag-footer">
+            <span class="diag-tag-actual">Entregable</span>
+            <span class="diag-text-deseado">Intervención directa con respaldo fotográfico y audiovisual.</span>
           </div>
         </div>
       </div>
 
-      <div class="bg-gray-900 text-white rounded-2xl p-6 sm:p-8 md:p-10 text-center">
-        <h2 class="text-xl sm:text-2xl font-bold mb-2">¿Deseas postular un área o colaborar en la ejecución?</h2>
-        <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-6 leading-relaxed">
+      <div class="cta-dark-card">
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">¿Deseas postular un área o colaborar en la ejecución?</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; max-width: 580px; margin: 0 auto 1.5rem auto;">
           Canalizamos solicitudes de recuperación para aulas, laboratorios y departamentos dentro de la Escuela de Ingeniería Industrial.
         </p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="mailto:projectergos@gmail.com" class="px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-xl hover:bg-gray-100 transition-colors">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
+          <a href="mailto:projectergos@gmail.com" class="btn-primary" style="background-color: #ffffff; color: #0f172a;">
             Enviar Solicitud por Correo
           </a>
-          <button onclick="showSection('inicio'); setTimeout(irAColaboracion, 150);" class="px-6 py-3 bg-gray-800 text-white font-bold text-sm rounded-xl hover:bg-gray-700 transition-colors cursor-pointer">
+          <button onclick="showSection('inicio'); setTimeout(irAColaboracion, 150);" class="btn-primary" style="background-color: #1e293b; color: #ffffff;">
             Apoyar Económicamente
           </button>
         </div>
@@ -535,11 +543,11 @@
   </main>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-white border-t border-gray-200 py-6 sm:py-8 text-center text-xs sm:text-sm text-gray-400">
+  <footer class="site-footer">
     <p>Ergos Project © 2026 • Escuela de Ingeniería Industrial</p>
   </footer>
 
-  <!-- Lógica JavaScript Separada -->
+  <!-- Script JS -->
   <script src="js/app.js"></script>
 </body>
 </html>
