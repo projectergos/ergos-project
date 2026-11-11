@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ergos Project | Iniciativa Estudiantil</title>
+  <!-- Tailwind CSS Principal + Fallback CDN universal -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99cKIC3T137CCzkyEIHgBKNbWmGKSHvClBH4521wcCA57YN9QKSdVCaGHyh5644WmDY28YG8UTTS4n7OPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Transición suave para drawer lateral en móvil */
+    #mobile-drawer {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #drawer-backdrop {
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased font-sans flex flex-col min-h-screen selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden">
+
+  <!-- ==================== ENCABEZADO / NAVBAR ==================== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex items-center justify-between">
+      
+      <!-- Identidad de Marca -->
+      <a href="#" onclick="showSection('inicio'); return false;" class="flex items-center gap-3 group shrink-0">
+        <img src="logo.png" alt="Ergos Project" class="w-10 h-10 object-contain rounded-xl shadow-sm group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.parentElement.querySelector('.fallback-logo').classList.remove('hidden'); this.classList.add('hidden');">
+        <div class="fallback-logo hidden w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center text-white font-black text-xl shadow-sm tracking-wider group-hover:scale-105 transition-transform">
+          E
+        </div>
+        <div>
+          <span class="block text-base sm:text-lg font-bold tracking-tight text-gray-900 leading-tight">ERGOS PROJECT</span>
+          <span class="block text-[11px] font-medium text-gray-500 uppercase tracking-widest">Iniciativa Estudiantil</span>
+        </div>
+      </a>
+
+      <!-- Menú Escritorio (Visible en md en adelante) -->
+      <nav class="hidden md:flex items-center gap-2 lg:gap-3">
+        <button onclick="showSection('inicio')" id="btn-nav-inicio" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 text-gray-900 transition-colors">
+          Inicio
+        </button>
+        <button onclick="showSection('quienes-somos')" id="btn-nav-quienes" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+          ¿Quiénes somos?
+        </button>
+        <button onclick="showSection('servicios')" id="btn-nav-servicios" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+          Servicios
+        </button>
+
+        <div class="h-4 w-px bg-gray-300 mx-1"></div>
+
+        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="p-2 text-gray-500 hover:text-pink-600 transition-colors" title="Instagram">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="mailto:projectergos@gmail.com" class="p-2 text-gray-500 hover:text-amber-700 transition-colors" title="Correo">
+          <svg class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </a>
+      </nav>
+
+      <!-- Botón Hamburguesa Móvil (Visible solo en pantallas pequeñas) -->
+      <button onclick="toggleMobileMenu(true)" class="md:hidden p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Barra Lateral Móvil (Drawer) -->
+  <div id="drawer-container" class="fixed inset-0 z-50 pointer-events-none md:hidden">
+    <!-- Backdrop oscuro -->
+    <div id="drawer-backdrop" onclick="toggleMobileMenu(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs opacity-0 transition-opacity"></div>
+    
+    <!-- Panel deslizable -->
+    <aside id="mobile-drawer" class="absolute top-0 right-0 w-72 max-w-[80vw] h-full bg-white shadow-2xl p-6 flex flex-col justify-between translate-x-full transition-transform duration-300 pointer-events-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
+          <span class="font-bold text-gray-900 text-sm tracking-wide">MENÚ</span>
+          <button onclick="toggleMobileMenu(false)" class="p-2 text-gray-400 hover:text-gray-700 rounded-lg" aria-label="Cerrar menú">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <nav class="space-y-2">
+          <button onclick="showSection('inicio'); toggleMobileMenu(false);" id="m-btn-inicio" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-900 bg-gray-100 flex items-center justify-between">
+            <span>Inicio</span>
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="showSection('quienes-somos'); toggleMobileMenu(false);" id="m-btn-quienes" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
+            <span>¿Quiénes somos?</span>
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="showSection('servicios'); toggleMobileMenu(false);" id="m-btn-servicios" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
+            <span>Servicios</span>
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="irAColaboracion(); toggleMobileMenu(false);" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
+            <span>Canales de Colaboración</span>
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Redes en drawer -->
+      <div class="pt-6 border-t border-gray-100 space-y-3">
+        <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 bg-pink-50 text-pink-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram @ergosproject</span>
+        </a>
+        <a href="mailto:projectergos@gmail.com" class="w-full py-2.5 px-3 bg-gray-100 text-gray-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>projectergos@gmail.com</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ==================== VISTA PRINCIPAL (INICIO) ==================== -->
+  <main id="view-inicio" class="flex-grow w-full">
+    
+    <!-- Hero / Título Principal -->
+    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-8 sm:pb-12 text-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight mb-4 sm:mb-6">
+        Recuperación y optimización de espacios académicos
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+        Iniciativa de autogestión estudiantil enfocada en renovar la infraestructura, aulas y laboratorios de la Escuela de Ingeniería Industrial.
+      </p>
+      <div>
+        <button onclick="irAColaboracion()" class="px-6 sm:px-8 py-3.5 bg-gray-800 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer">
+          Ver canales de colaboración
+        </button>
+      </div>
+    </section>
+
+    <!-- Estado de Recaudación -->
+    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:p-10">
+        <h2 class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-6 text-center">Estado de Recaudación</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+          <div class="pt-4 sm:pt-0">
+            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 mb-1">$450</span>
+            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Recaudado hasta el momento</span>
+          </div>
+          <div class="pt-4 sm:pt-0">
+            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-amber-700 mb-1">$180</span>
+            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Invertido en Insumos</span>
+          </div>
+          <div class="pt-4 sm:pt-0">
+            <span class="block text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-1">$270</span>
+            <span class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">Fondo Disponible</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagnóstico Operativo (Siempre 3 columnas fijas en PC) -->
+    <section class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight text-center mb-8 sm:mb-12">
+        Diagnóstico Operativo
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Impermeabilización -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Impermeabilización</h3>
+            <div class="mb-4">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
+              <p class="text-sm text-gray-600 leading-relaxed">Filtraciones activas en losas superiores y acumulación de humedad en paredes perimetrales.</p>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
+            <p class="text-sm font-medium text-gray-800 leading-relaxed">Saneamiento de superficies y aplicación de manto asfáltico sellador de alta durabilidad.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Mobiliario y Pintura -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Mobiliario y Pintura</h3>
+            <div class="mb-4">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
+              <p class="text-sm text-gray-600 leading-relaxed">Desgaste superficial generalizado en paredes y pupitres con fijaciones desajustadas.</p>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
+            <p class="text-sm font-medium text-gray-800 leading-relaxed">Restauración integral, fijación estructural y aplicación de pintura.</p>
+          </div>
+        </div>
+
+        <!-- Card 3: Climatización -->
+        <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Climatización</h3>
+            <div class="mb-4">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
+              <p class="text-sm text-gray-600 leading-relaxed">Unidades de A/A actualmente inactivas y áreas de estudio sin refrigeración adecuada.</p>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-2">Estado Deseado</span>
+            <p class="text-sm font-medium text-gray-800 leading-relaxed">Mantenimiento preventivo, recarga de refrigerante y reactivación funcional de unidades.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bitácora de Avances -->
+    <section class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight text-center mb-10 sm:mb-14">
+        Bitácora de Avances
+      </h2>
+
+      <div class="relative border-l-2 border-gray-200 ml-4 sm:ml-8 md:ml-12 space-y-8 sm:space-y-10">
+        <!-- Hito 1: Operación Apertura -->
+        <div class="relative pl-6 sm:pl-8">
+          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-white"></div>
+          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">1-2 de Octubre • Completado</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Apertura</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Limpieza y Pintura de los Salones SUM y LIO, Sanitarios del Dpto. de Gerencia e instalación de Cortinas y Ventiladores en el salón SUM.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a href="https://www.instagram.com/reel/DeElWtaNesH/?cplk=aGdlMHh6ejN0Y2Jv" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-700 text-xs font-bold transition-colors">
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>Ver resultados</span>
+              </a>
+              <a href="https://drive.google.com/drive/folders/1rj3A_TCtZLZpS7AOn3l8Gz-JKaJvq22A?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition-colors">
+                <svg class="w-4 h-4 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2z"/></svg>
+                <span>Mayor Información</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hito 2: Operación Humedad (Fase 1) -->
+        <div class="relative pl-6 sm:pl-8">
+          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-amber-600 ring-4 ring-white"></div>
+          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-2">En Progreso</span>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 1)</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Inspección exhaustiva de los techos para fijar materiales requeridos y su correspondiente cotización.
+            </p>
+          </div>
+        </div>
+
+        <!-- Hito 3: Operación Humedad (Fase 2) -->
+        <div class="relative pl-6 sm:pl-8">
+          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
+          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm opacity-90">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Siguiente Fase</span>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 2)</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Recaudación de fondos para la compra de los materiales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Canales de Colaboración -->
+    <section id="colaboracion" class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24 scroll-mt-24">
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 md:p-10 shadow-sm text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Canales de Colaboración</h2>
+        <p class="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto leading-relaxed">
+          Toda contribución se destina exclusivamente a la adquisición transparente de insumos y materiales.
+        </p>
+
+        <!-- Datos Bancarios -->
+        <div class="bg-gray-50 rounded-2xl p-5 sm:p-6 border border-gray-200 max-w-md mx-auto text-left mb-6 space-y-2.5 text-sm sm:text-base font-mono">
+          <p><span class="font-sans font-bold text-gray-500">Banco:</span> Mercantil</p>
+          <p><span class="font-sans font-bold text-gray-500">C.I.:</span> 30.682.297</p>
+          <p><span class="font-sans font-bold text-gray-500">Teléfono:</span> 0412-8829844</p>
+        </div>
+
+        <button onclick="copiarDatosPago(this)" class="w-full max-w-md mx-auto py-3 px-6 bg-gray-800 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer block">
+          Copiar Datos de Pago
+        </button>
+
+        <!-- Separador -->
+        <div class="flex items-center my-6 max-w-md mx-auto">
+          <div class="flex-grow border-t border-gray-200"></div>
+          <span class="px-3 text-xs uppercase tracking-wider font-semibold text-gray-400">O contacta vía</span>
+          <div class="flex-grow border-t border-gray-200"></div>
+        </div>
+
+        <!-- Botón Instagram DM con diseño responsivo -->
+        <div class="max-w-md mx-auto space-y-2">
+          <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full min-h-[48px] px-4 py-3.5 bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:opacity-95 text-white font-bold text-sm sm:text-base rounded-xl transition-all shadow-sm flex items-center justify-center gap-3">
+            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span class="text-center">Contactar al DM de Instagram (@ergosproject)</span>
+          </a>
+          <button onclick="copiarInstagram(this)" class="w-full text-xs text-gray-500 hover:text-gray-800 py-1.5 transition-colors cursor-pointer">
+            Copiar usuario de Instagram (@ergosproject)
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== VISTA ¿QUIÉNES SOMOS? ==================== -->
+  <main id="view-quienes-somos" class="flex-grow w-full hidden">
+    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
+      
+      <!-- Presentación Principal -->
+      <div class="text-center mb-10 sm:mb-14">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
+          ¿Quiénes somos?
+        </h1>
+      </div>
+
+      <!-- Resumen de Identidad -->
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
+        <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
+          <strong class="text-gray-900">ERGOS PROJECT</strong> es una asociación de estudiantes sin fines de lucro que hacen vida dentro de la Escuela de Ingeniería Industrial, perteneciente a la Facultad de Ingeniería de la Universidad de Carabobo.
+        </p>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Dicha iniciativa se considera importante debido a su compromiso de renovar y recuperar las áreas afectadas tras el terremoto del pasado 24 de junio. Como futuros ingenieros, buscamos aplicar nuestros conocimientos, gestión y trabajo en equipo para mejorar la infraestructura y devolver la funcionalidad y bienestar a nuestra cotidianidad. Estamos convencidos de que, con la solidaridad y el esfuerzo colectivo que se logre reunir, transformaremos esta adversidad en un impacto positivo y duradero.
+        </p>
+      </div>
+
+      <!-- Orden de Prioridades -->
+      <div class="mb-12 sm:mb-16">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-2">ORDEN DE PRIORIDADES</h2>
+        <p class="text-sm sm:text-base text-gray-600 mb-8 leading-relaxed max-w-4xl">
+          Con base en nuestro alcance actual, se hace imposible abarcar todas las operaciones al mismo tiempo, en especial las más complejas (que requieren mayor inversión), por lo cual, se decidió priorizar y cumplir primero aquellas más “alcanzables” y de esa forma se espera obtener progresivamente la confianza del colectivo estudiantil de la escuela, para así poder planificar operaciones de mayor relevancia. El mencionado orden consta de tres (3) fases, con las operaciones planteadas hasta el momento:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Fase I -->
+          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 rounded-md uppercase tracking-wider mb-3">Fase I</span>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Higiene y Mantenimiento</h3>
+              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+                <li><strong>Operación Apertura:</strong> adecuación de superficies en sanitarios de la dirección de gerencia, y en los salones SUM y LIO. También, limpieza de áreas verdes de la EII.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Fase II -->
+          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-amber-700 bg-amber-50 rounded-md uppercase tracking-wider mb-3">Fase II</span>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Impermeabilización y Remodelación</h3>
+              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+                <li><strong>Operación Humedad:</strong> corrección de filtraciones en losa superior y saneamiento de humedad en paredes de aulas de clase.</li>
+                <li><strong>Operación Wireless:</strong> instalación de red WiFi en el pasillo principal de la EII.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Fase III -->
+          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between md:col-span-2 lg:col-span-1">
+            <div>
+              <span class="inline-block px-2.5 py-1 text-[11px] font-bold text-gray-500 bg-gray-100 rounded-md uppercase tracking-wider mb-3">Fase III</span>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Recuperación y Transformación</h3>
+              <ol class="text-xs sm:text-sm text-gray-600 space-y-2 list-decimal list-inside leading-relaxed">
+                <li><strong>Operación Lápiz y Papel:</strong> restauración de pupitres y/o mobiliario dentro de las aulas de clase de la EII.</li>
+                <li><strong>Operación Clima:</strong> climatización de los salones de clase con sistemas de aire acondicionado.</li>
+                <li><strong>Operación SIO:</strong> intervención profunda como mecanismo para contribuir a la reactivación de sus funciones de forma regular.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lineamientos -->
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-6">LINEAMIENTOS</h2>
+        <ol class="space-y-4 text-sm sm:text-base text-gray-700 list-decimal list-inside leading-relaxed">
+          <li>Ningún proyecto debe involucrar los servicios públicos tales como electricidad o agua. Por tanto, proyectos como la restauración de los baños ubicados al final del pasillo principal, quedan descartados.</li>
+          <li>Para la gestión de los proyectos, lo inicial es realizar un diagnóstico en el área de estudio, luego solicitar (o realizar) una lista de materiales y por último empezar en la recaudación colectiva de fondos.</li>
+          <li>Para la recaudación de los fondos, tener una cuenta bancaria cuyos únicos movimientos sean para los proyectos.</li>
+          <li>Se deben respaldar todos los egresos con su respectiva factura e idealmente en un portal Web y una relación en Microsoft Excel.</li>
+          <li>Para evitar conflictos legales, luego de recaudar los fondos, se deben comprar los insumos, la escuela no va a recibir dinero directamente.</li>
+          <li>Para la entrega de insumos, se debe enviar una carta a la Dirección bajo el concepto de “Donación Estudiantil” (idealmente con nombre y apellido de cada uno de los colaboradores).</li>
+          <li>Inicialmente, están prohibidos los proyectos que planteen un cobro obligatorio a los estudiantes, debe ser netamente voluntario.</li>
+          <li>Se debe contemplar la existencia de 2 tipos de colaboradores: primarios (núcleo de trabajo esencial) y secundarios (aporte únicamente económico). Cabe destacar que, de los colaboradores secundarios se aceptan sugerencias más no imposiciones.</li>
+          <li>Para la entrega de proyectos terminados, se prevé una convocatoria pública con autoridades de la escuela, que transmita confianza a los colaboradores.</li>
+          <li>Garantizar transparencia en todo momento, tanto en el manejo de recursos como en la aplicación efectiva de los proyectos.</li>
+        </ol>
+      </div>
+
+      <!-- Aspectos a Considerar -->
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-6">ASPECTOS A CONSIDERAR</h2>
+        <ol class="space-y-4 text-sm sm:text-base text-gray-700 list-decimal list-inside leading-relaxed">
+          <li><strong>ERGOS PROJECT</strong> es estrictamente una organización de estudiantes sin fines de lucro y sin fines políticos, que no tiene por objetivo ni formar, ni sustituir el centro de estudiantes dentro de la Escuela de Ingeniería Industrial.</li>
+          <li>Para evitar conflictos legales, aclarar desde un primer momento que es una iniciativa de estudiantes, que cuenta con apoyo docente pero, no hace mención al colectivo docente en lo que se refiere a recaudaciones.</li>
+          <li>Para realizar el enlace de los colaboradores primarios con los secundarios, idealmente se buscarán estudiantes que en representación de los semestres pertenecientes a la escuela, se encarguen de transmitir la idea y la confianza a los demás colaboradores, como estrategia para maximizar las donaciones.</li>
+          <li>Dentro de la organización de los equipos de trabajo, se debe contemplar la división de los integrantes en subgrupos para determinadas funciones, que permita al subgrupo desarrollar sus tareas de forma independiente pero de forma articulada respecto al resto del equipo.</li>
+          <li>Para la formación de los subgrupos (o departamentos), se prevé dividir las obligaciones en: Logística, Finanzas y Relaciones Públicas, entre otros.</li>
+          <li>A pesar de que las tareas sean por grupos, no implica que no pueda existir la colaboración de una persona en más de un grupo, siempre que eso no impida el desarrollo de las ocupaciones.</li>
+          <li>No existe un límite de necesidades que se deba cubrir, eso lo marca la cantidad de apoyo que tenga la iniciativa.</li>
+          <li>El equipo de trabajo requiere de coordinación con un docente guía, designado por la escuela de ingeniería industrial y adjunto a la misma, cuya función es orientar y aprobar las actividades a realizar de acuerdo con los lineamientos anteriormente establecidos.</li>
+          <li>Aparte de la restauración de los espacios maltratados como mantenimiento correctivo, también sería productivo realizar ponencias dentro de la escuela que sirvan de mantenimiento preventivo, y de esa forma llamar a la conciencia colectiva respecto de los espacios restaurados.</li>
+          <li>Para las operaciones de climatización, se deben tomar en cuenta también los gastos inherentes al artefacto que se requiera instalar (uno de ellos es, por ejemplo: la mano de obra).</li>
+          <li>En caso de requerir jornadas o tareas extra de operadores públicos y se deba cancelar una tarifa por día, será financiada con los fondos recaudados.</li>
+          <li>Dentro de las recaudaciones pertinentes, no se prevé involucrar la compra de insumos de limpieza.</li>
+          <li>Documentar cada uno de los proyectos de la campaña, para dejar constancia de la hoja de ruta que se viene siguiendo.</li>
+          <li>Contemplar la dinámica con egresados como método paralelo de recaudación de fondos.</li>
+          <li>A pesar de que también hay salones pertenecientes a la escuela fuera del núcleo principal de la misma, al no poder asegurar la integridad de los proyectos a largo plazo, no se contempla la intervención en esos espacios (ejemplo: salón A8I, Salón SEIN).</li>
+          <li>Idealmente no se debería trabajar en varios proyectos a la vez, la idea es enfocar los esfuerzos en un único proyecto para poder entregar lo más rápido posible.</li>
+          <li>Considerar la dinámica con empresas como mecanismo de apoyo en el desarrollo de los proyectos.</li>
+          <li>El número de operaciones por fase podría variar según la planificación.</li>
+          <li>El avance de fase es simplemente un cambio de enfoque dentro de las operaciones pero, no implica la exclusión de actividades referidas a etapas anteriores. En otras palabras, es ampliar la cantidad de actividades a realizar en los espacios.</li>
+        </ol>
+      </div>
+
+      <!-- Botón de regreso -->
+      <div class="text-center">
+        <button onclick="showSection('inicio')" class="px-7 py-3 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer">
+          ← Volver a la página principal
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== VISTA SERVICIOS ==================== -->
+  <main id="view-servicios" class="flex-grow w-full hidden">
+    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
+      
+      <!-- Presentación Principal -->
+      <div class="text-center mb-10 sm:mb-14">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-4">
+          Servicios y Gestión
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Áreas de intervención técnica, logística y operativa desarrolladas para la recuperación integral de la infraestructura académica.
+        </p>
+      </div>
+
+      <!-- Cuadrícula de Servicios -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <!-- Servicio 1 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-lg mb-4">
+              01
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Diagnóstico Técnico y Levantamiento</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Inspección estructural de aulas, laboratorios y áreas comunes para cuantificar daños por humedad, filtraciones y desgaste de mobiliario.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
+            <span class="text-xs sm:text-sm text-gray-700 font-medium">Informe de daños y lista de materiales requeridos.</span>
+          </div>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4">
+              02
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Gestión y Planificación de Operaciones</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Elaboración de presupuestos, cronogramas de trabajo por fases y administración transparente de aportes económicos y donaciones de materiales.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
+            <span class="text-xs sm:text-sm text-gray-700 font-medium">Hojas de balance, actas formales de entrega y facturación.</span>
+          </div>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-lg mb-4">
+              03
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Adecuación Ergonómica de Ambientes</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Acondicionamiento físico de espacios: pintura reflectiva antirreflejo, ventilación cruzada, instalación de cortinas y restauración estructural de pupitres.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
+            <span class="text-xs sm:text-sm text-gray-700 font-medium">Espacios de estudio higiénicos, frescos y funcionales.</span>
+          </div>
+        </div>
+
+        <!-- Servicio 4 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-lg mb-4">
+              04
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Jornadas de Voluntariado Estudiantil</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Coordinación y ejecución en campo de jornadas de limpieza profunda, lijado, pintura, fijaciones mecánicas y mantenimiento preventivo.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Entregable</span>
+            <span class="text-xs sm:text-sm text-gray-700 font-medium">Intervención directa con respaldo fotográfico y audiovisual.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta CTA de Servicios -->
+      <div class="bg-gray-900 text-white rounded-2xl p-6 sm:p-8 md:p-10 text-center">
+        <h2 class="text-xl sm:text-2xl font-bold mb-2">¿Deseas postular un área o colaborar en la ejecución?</h2>
+        <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-6 leading-relaxed">
+          Canalizamos solicitudes de recuperación para aulas, laboratorios y departamentos dentro de la Escuela de Ingeniería Industrial.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="mailto:projectergos@gmail.com" class="px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-xl hover:bg-gray-100 transition-colors">
+            Enviar Solicitud por Correo
+          </a>
+          <button onclick="showSection('inicio'); setTimeout(irAColaboracion, 150);" class="px-6 py-3 bg-gray-800 text-white font-bold text-sm rounded-xl hover:bg-gray-700 transition-colors cursor-pointer">
+            Apoyar Económicamente
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-white border-t border-gray-200 py-6 sm:py-8 text-center text-xs sm:text-sm text-gray-400">
+    <p>Ergos Project © 2026 • Escuela de Ingeniería Industrial</p>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // Control de navegación entre Inicio, ¿Quiénes somos? y Servicios
+    function showSection(sectionId) {
+      const viewInicio = document.getElementById('view-inicio');
+      const viewQuienes = document.getElementById('view-quienes-somos');
+      const viewServicios = document.getElementById('view-servicios');
+
+      const btnInicio = document.getElementById('btn-nav-inicio');
+      const btnQuienes = document.getElementById('btn-nav-quienes');
+      const btnServicios = document.getElementById('btn-nav-servicios');
+
+      const mBtnInicio = document.getElementById('m-btn-inicio');
+      const mBtnQuienes = document.getElementById('m-btn-quienes');
+      const mBtnServicios = document.getElementById('m-btn-servicios');
+
+      // Ocultar todas las vistas
+      viewInicio.classList.add('hidden');
+      viewQuienes.classList.add('hidden');
+      viewServicios.classList.add('hidden');
+
+      // Resetear clases activas de escritorio
+      [btnInicio, btnQuienes, btnServicios].forEach(btn => {
+        if (btn) {
+          btn.classList.remove('bg-gray-100', 'text-gray-900');
+          btn.classList.add('text-gray-600');
+        }
+      });
+
+      // Resetear clases activas de móvil
+      [mBtnInicio, mBtnQuienes, mBtnServicios].forEach(btn => {
+        if (btn) {
+          btn.classList.remove('bg-gray-100', 'text-gray-900');
+          btn.classList.add('text-gray-600');
+        }
+      });
+
+      // Activar vista solicitada
+      if (sectionId === 'quienes-somos') {
+        viewQuienes.classList.remove('hidden');
+        btnQuienes.classList.add('bg-gray-100', 'text-gray-900');
+        btnQuienes.classList.remove('text-gray-600');
+        if (mBtnQuienes) {
+          mBtnQuienes.classList.add('bg-gray-100', 'text-gray-900');
+          mBtnQuienes.classList.remove('text-gray-600');
+        }
+      } else if (sectionId === 'servicios') {
+        viewServicios.classList.remove('hidden');
+        btnServicios.classList.add('bg-gray-100', 'text-gray-900');
+        btnServicios.classList.remove('text-gray-600');
+        if (mBtnServicios) {
+          mBtnServicios.classList.add('bg-gray-100', 'text-gray-900');
+          mBtnServicios.classList.remove('text-gray-600');
+        }
+      } else {
+        viewInicio.classList.remove('hidden');
+        btnInicio.classList.add('bg-gray-100', 'text-gray-900');
+        btnInicio.classList.remove('text-gray-600');
+        if (mBtnInicio) {
+          mBtnInicio.classList.add('bg-gray-100', 'text-gray-900');
+          mBtnInicio.classList.remove('text-gray-600');
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Desplazamiento confiable a Canales de Colaboración
+    function irAColaboracion() {
+      const viewInicio = document.getElementById('view-inicio');
+      if (viewInicio.classList.contains('hidden')) {
+        showSection('inicio');
+      }
+      setTimeout(() => {
+        const target = document.getElementById('colaboracion');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 80);
+    }
+
+    // Control de Drawer Móvil
+    function toggleMobileMenu(abrir) {
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const container = document.getElementById('drawer-container');
+
+      if (abrir) {
+        container.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+      } else {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        drawer.classList.remove('translate-x-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => {
+          container.classList.add('pointer-events-none');
+        }, 300);
+      }
+    }
+
+    // Copiado al portapapeles con fallback robusto
+    function copiarDatosPago(btn) {
+      const datos = "Banco: Mercantil\nC.I.: 30.682.297\nTeléfono: 0412-8829844";
+      copiarTextoUniversal(datos, btn, "¡Copiado con éxito!");
+    }
+
+    function copiarInstagram(btn) {
+      copiarTextoUniversal("@ergosproject", btn, "¡Usuario copiado!");
+    }
+
+    function copiarTextoUniversal(texto, elemento, mensajeExito) {
+      const textoOriginal = elemento.innerText;
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(() => {
+          mostrarFeedback(elemento, textoOriginal, mensajeExito);
+        }).catch(() => {
+          fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
+        });
+      } else {
+        fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
+      }
+    }
+
+    function fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito) {
+      try {
+        const areaTemp = document.createElement("textarea");
+        areaTemp.value = texto;
+        areaTemp.style.position = "fixed";
+        areaTemp.style.left = "-9999px";
+        areaTemp.style.top = "0";
+        document.body.appendChild(areaTemp);
+        areaTemp.focus();
+        areaTemp.select();
+        document.execCommand('copy');
+        document.body.removeChild(areaTemp);
+        mostrarFeedback(elemento, textoOriginal, mensajeExito);
+      } catch (err) {
+        alert("Información para transferir:\n" + texto);
+      }
+    }
+
+    function mostrarFeedback(elemento, original, nuevo) {
+      elemento.innerText = nuevo;
+      elemento.classList.add('bg-emerald-600');
+      setTimeout(() => {
+        elemento.innerText = original;
+        elemento.classList.remove('bg-emerald-600');
+      }, 2200);
+    }
+  </script>
+</body>
+</html>
