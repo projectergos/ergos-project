@@ -81,19 +81,19 @@ function irAColaboracion() {
   }, 80);
 }
 
-// Control del menú lateral en móviles
+// Control del menú lateral en móviles (100% nativo y confiable)
 function toggleMobileMenu(abrir) {
-  const drawer = document.getElementById('mobile-drawer');
-  const backdrop = document.getElementById('drawer-backdrop');
   const container = document.getElementById('drawer-container');
+  if (!container) return;
 
   if (abrir) {
-    container.classList.remove('pointer-events-none');
-    backdrop.classList.remove('opacity-0');
-    backdrop.classList.add('opacity-100');
-    drawer.classList.remove('translate-x-full');
-    drawer.classList.add('translate-x-0');
+    container.classList.add('is-open');
+    document.body.style.overflow = 'hidden'; // Evita scroll de fondo al abrir menú
   } else {
+    container.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+} else {
     backdrop.classList.remove('opacity-100');
     backdrop.classList.add('opacity-0');
     drawer.classList.remove('translate-x-0');

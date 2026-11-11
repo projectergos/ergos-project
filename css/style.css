@@ -874,18 +874,18 @@ button {
   position: fixed;
   inset: 0;
   z-index: 60;
+  pointer-events: none;
 }
-
-.pointer-events-none { pointer-events: none !important; }
 
 .drawer-backdrop {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .mobile-drawer {
@@ -903,7 +903,23 @@ button {
   justify-content: space-between;
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: auto;
+  pointer-events: none;
+  z-index: 61;
+}
+
+/* Estado Activo / Abierto */
+.drawer-container.is-open {
+  pointer-events: auto !important;
+}
+
+.drawer-container.is-open .drawer-backdrop {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.drawer-container.is-open .mobile-drawer {
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
 }
 
 .drawer-header {
@@ -926,6 +942,9 @@ button {
   padding: 0.5rem;
   color: #94a3b8;
   font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .drawer-nav {
@@ -990,7 +1009,6 @@ button {
 
 .drawer-social-btn.insta { background-color: #fdf2f8; color: #be185d; }
 .drawer-social-btn.email { background-color: #f1f5f9; color: #334155; }
-
 /* Footer */
 .site-footer {
   margin-top: auto;
