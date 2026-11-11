@@ -864,7 +864,7 @@ button {
   z-index: 60;
 }
 
-.pointer-events-none { pointer-events-none; }
+.pointer-events-none { pointer-events: none !important; }
 
 .drawer-backdrop {
   position: absolute;
