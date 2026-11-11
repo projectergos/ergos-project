@@ -1,0 +1,28 @@
+/* ==========================================================
+   ERGOS PROJECT - ESTILOS BASE Y COMPONENTES
+   ========================================================== */
+
+/* Tipografía base Inter */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Transiciones para el Drawer Lateral en Móvil */
+#mobile-drawer {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#drawer-backdrop {
+  transition: opacity 0.3s ease;
+}
+
+/* Mejoras de usabilidad táctil */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Suavizado de fuentes */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

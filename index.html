@@ -4,29 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ergos Project | Iniciativa Estudiantil</title>
-  <!-- Tailwind CSS Principal + Fallback CDN universal -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99cKIC3T137CCzkyEIHgBKNbWmGKSHvClBH4521wcCA57YN9QKSdVCaGHyh5644WmDY28YG8UTTS4n7OPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Tipografía Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS Engine -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Transición suave para drawer lateral en móvil */
-    #mobile-drawer {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #drawer-backdrop {
-      transition: opacity 0.3s ease;
-    }
-  </style>
+  
+  <!-- Estilos Personalizados Separados -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased font-sans flex flex-col min-h-screen selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden">
 
   <!-- ==================== ENCABEZADO / NAVBAR ==================== -->
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex items-center justify-between">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
       
       <!-- Identidad de Marca -->
       <a href="#" onclick="showSection('inicio'); return false;" class="flex items-center gap-3 group shrink-0">
         <img src="logo.png" alt="Ergos Project" class="w-10 h-10 object-contain rounded-xl shadow-sm group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.parentElement.querySelector('.fallback-logo').classList.remove('hidden'); this.classList.add('hidden');">
-        <div class="fallback-logo hidden w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center text-white font-black text-xl shadow-sm tracking-wider group-hover:scale-105 transition-transform">
+        <div class="fallback-logo hidden w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-white font-black text-xl shadow-sm tracking-wider group-hover:scale-105 transition-transform">
           E
         </div>
         <div>
@@ -37,29 +39,29 @@
 
       <!-- Menú Escritorio (Visible en md en adelante) -->
       <nav class="hidden md:flex items-center gap-2 lg:gap-3">
-        <button onclick="showSection('inicio')" id="btn-nav-inicio" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 text-gray-900 transition-colors">
-          Inicio
+        <button onclick="showSection('inicio')" id="btn-nav-inicio" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-gray-100 text-gray-900 transition-colors">
+          <i class="fa-solid fa-house mr-1.5 text-xs"></i>Inicio
         </button>
-        <button onclick="showSection('quienes-somos')" id="btn-nav-quienes" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-          ¿Quiénes somos?
+        <button onclick="showSection('quienes-somos')" id="btn-nav-quienes" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+          <i class="fa-solid fa-users mr-1.5 text-xs"></i>¿Quiénes somos?
         </button>
-        <button onclick="showSection('servicios')" id="btn-nav-servicios" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-          Servicios
+        <button onclick="showSection('servicios')" id="btn-nav-servicios" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+          <i class="fa-solid fa-screwdriver-wrench mr-1.5 text-xs"></i>Servicios
         </button>
 
-        <div class="h-4 w-px bg-gray-300 mx-1"></div>
+        <div class="h-4 w-px bg-gray-300 mx-2"></div>
 
         <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="p-2 text-gray-500 hover:text-pink-600 transition-colors" title="Instagram">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <i class="fa-brands fa-instagram text-lg"></i>
         </a>
         <a href="mailto:projectergos@gmail.com" class="p-2 text-gray-500 hover:text-amber-700 transition-colors" title="Correo">
-          <svg class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <i class="fa-regular fa-envelope text-lg"></i>
         </a>
       </nav>
 
-      <!-- Botón Hamburguesa Móvil (Visible solo en pantallas pequeñas) -->
+      <!-- Botón Hamburguesa Móvil -->
       <button onclick="toggleMobileMenu(true)" class="md:hidden p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <i class="fa-solid fa-bars text-xl"></i>
       </button>
 
     </div>
@@ -67,47 +69,44 @@
 
   <!-- Barra Lateral Móvil (Drawer) -->
   <div id="drawer-container" class="fixed inset-0 z-50 pointer-events-none md:hidden">
-    <!-- Backdrop oscuro -->
     <div id="drawer-backdrop" onclick="toggleMobileMenu(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs opacity-0 transition-opacity"></div>
     
-    <!-- Panel deslizable -->
     <aside id="mobile-drawer" class="absolute top-0 right-0 w-72 max-w-[80vw] h-full bg-white shadow-2xl p-6 flex flex-col justify-between translate-x-full transition-transform duration-300 pointer-events-auto">
       <div>
         <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
           <span class="font-bold text-gray-900 text-sm tracking-wide">MENÚ</span>
           <button onclick="toggleMobileMenu(false)" class="p-2 text-gray-400 hover:text-gray-700 rounded-lg" aria-label="Cerrar menú">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            <i class="fa-solid fa-xmark text-lg"></i>
           </button>
         </div>
 
         <nav class="space-y-2">
           <button onclick="showSection('inicio'); toggleMobileMenu(false);" id="m-btn-inicio" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-900 bg-gray-100 flex items-center justify-between">
-            <span>Inicio</span>
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-house text-gray-500 text-xs"></i>Inicio</span>
+            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
           </button>
           <button onclick="showSection('quienes-somos'); toggleMobileMenu(false);" id="m-btn-quienes" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span>¿Quiénes somos?</span>
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-users text-gray-500 text-xs"></i>¿Quiénes somos?</span>
+            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
           </button>
           <button onclick="showSection('servicios'); toggleMobileMenu(false);" id="m-btn-servicios" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span>Servicios</span>
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-screwdriver-wrench text-gray-500 text-xs"></i>Servicios</span>
+            <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
           </button>
           <button onclick="irAColaboracion(); toggleMobileMenu(false);" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between">
-            <span>Canales de Colaboración</span>
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-hand-holding-dollar text-gray-500 text-xs"></i>Canales de Colaboración</span>
+            <i class="fa-solid fa-arrow-down text-gray-300 text-xs"></i>
           </button>
         </nav>
       </div>
 
-      <!-- Redes en drawer -->
       <div class="pt-6 border-t border-gray-100 space-y-3">
         <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 bg-pink-50 text-pink-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <i class="fa-brands fa-instagram text-base"></i>
           <span>Instagram @ergosproject</span>
         </a>
         <a href="mailto:projectergos@gmail.com" class="w-full py-2.5 px-3 bg-gray-100 text-gray-700 font-semibold text-xs rounded-xl flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <i class="fa-regular fa-envelope text-base"></i>
           <span>projectergos@gmail.com</span>
         </a>
       </div>
@@ -117,17 +116,22 @@
   <!-- ==================== VISTA PRINCIPAL (INICIO) ==================== -->
   <main id="view-inicio" class="flex-grow w-full">
     
-    <!-- Hero / Título Principal -->
-    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-8 sm:pb-12 text-center">
+    <!-- Hero Principal -->
+    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-12 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold mb-6 border border-amber-200">
+        <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+        Escuela de Ingeniería Industrial • Universidad de Carabobo
+      </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight mb-4 sm:mb-6">
         Recuperación y optimización de espacios académicos
       </h1>
       <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-        Iniciativa de autogestión estudiantil enfocada en renovar la infraestructura, aulas y laboratorios de la Escuela de Ingeniería Industrial.
+        Iniciativa de autogestión estudiantil enfocada en renovar la infraestructura, aulas y laboratorios tras las afectaciones del sismo del 24 de junio.
       </p>
       <div>
-        <button onclick="irAColaboracion()" class="px-6 sm:px-8 py-3.5 bg-gray-800 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer">
-          Ver canales de colaboración
+        <button onclick="irAColaboracion()" class="px-7 sm:px-8 py-3.5 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer inline-flex items-center gap-2">
+          <span>Ver canales de colaboración</span>
+          <i class="fa-solid fa-arrow-down text-xs"></i>
         </button>
       </div>
     </section>
@@ -153,16 +157,19 @@
       </div>
     </section>
 
-    <!-- Diagnóstico Operativo (Siempre 3 columnas fijas en PC) -->
+    <!-- Diagnóstico Operativo (Siempre 3 columnas en PC) -->
     <section class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
       <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight text-center mb-8 sm:mb-12">
         Diagnóstico Operativo
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Card 1: Impermeabilización -->
+        <!-- Card 1 -->
         <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
           <div>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-cloud-rain text-lg"></i>
+            </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Impermeabilización</h3>
             <div class="mb-4">
               <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
@@ -175,9 +182,12 @@
           </div>
         </div>
 
-        <!-- Card 2: Mobiliario y Pintura -->
+        <!-- Card 2 -->
         <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
           <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-paint-roller text-lg"></i>
+            </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Mobiliario y Pintura</h3>
             <div class="mb-4">
               <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
@@ -190,9 +200,12 @@
           </div>
         </div>
 
-        <!-- Card 3: Climatización -->
+        <!-- Card 3 -->
         <div class="bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-gray-300 transition-colors">
           <div>
+            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-snowflake text-lg"></i>
+            </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Climatización</h3>
             <div class="mb-4">
               <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Estado Actual</span>
@@ -214,9 +227,9 @@
       </h2>
 
       <div class="relative border-l-2 border-gray-200 ml-4 sm:ml-8 md:ml-12 space-y-8 sm:space-y-10">
-        <!-- Hito 1: Operación Apertura -->
+        <!-- Hito 1 -->
         <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-white"></div>
+          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-white"></div>
           <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">1-2 de Octubre • Completado</span>
@@ -227,20 +240,20 @@
             </p>
             <div class="flex flex-wrap items-center gap-3 pt-2">
               <a href="https://www.instagram.com/reel/DeElWtaNesH/?cplk=aGdlMHh6ejN0Y2Jv" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-700 text-xs font-bold transition-colors">
-                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <i class="fa-brands fa-instagram text-sm"></i>
                 <span>Ver resultados</span>
               </a>
               <a href="https://drive.google.com/drive/folders/1rj3A_TCtZLZpS7AOn3l8Gz-JKaJvq22A?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition-colors">
-                <svg class="w-4 h-4 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2z"/></svg>
+                <i class="fa-solid fa-folder-open text-sm text-amber-600"></i>
                 <span>Mayor Información</span>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Hito 2: Operación Humedad (Fase 1) -->
+        <!-- Hito 2 -->
         <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-amber-600 ring-4 ring-white"></div>
+          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-amber-600 ring-4 ring-white"></div>
           <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
             <span class="text-xs font-bold text-amber-700 uppercase tracking-wider block mb-2">En Progreso</span>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 1)</h3>
@@ -250,9 +263,9 @@
           </div>
         </div>
 
-        <!-- Hito 3: Operación Humedad (Fase 2) -->
+        <!-- Hito 3 -->
         <div class="relative pl-6 sm:pl-8">
-          <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
+          <div class="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
           <div class="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm opacity-90">
             <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Siguiente Fase</span>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Operación Humedad (Fase 2)</h3>
@@ -279,8 +292,8 @@
           <p><span class="font-sans font-bold text-gray-500">Teléfono:</span> 0412-8829844</p>
         </div>
 
-        <button onclick="copiarDatosPago(this)" class="w-full max-w-md mx-auto py-3 px-6 bg-gray-800 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer block">
-          Copiar Datos de Pago
+        <button onclick="copiarDatosPago(this)" class="w-full max-w-md mx-auto py-3.5 px-6 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer block">
+          <i class="fa-regular fa-copy mr-2"></i>Copiar Datos de Pago
         </button>
 
         <!-- Separador -->
@@ -290,10 +303,10 @@
           <div class="flex-grow border-t border-gray-200"></div>
         </div>
 
-        <!-- Botón Instagram DM con diseño responsivo -->
+        <!-- Botón Instagram DM -->
         <div class="max-w-md mx-auto space-y-2">
           <a href="https://instagram.com/ergosproject" target="_blank" rel="noopener noreferrer" class="w-full min-h-[48px] px-4 py-3.5 bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:opacity-95 text-white font-bold text-sm sm:text-base rounded-xl transition-all shadow-sm flex items-center justify-center gap-3">
-            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <i class="fa-brands fa-instagram text-xl shrink-0"></i>
             <span class="text-center">Contactar al DM de Instagram (@ergosproject)</span>
           </a>
           <button onclick="copiarInstagram(this)" class="w-full text-xs text-gray-500 hover:text-gray-800 py-1.5 transition-colors cursor-pointer">
@@ -308,14 +321,12 @@
   <main id="view-quienes-somos" class="flex-grow w-full hidden">
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
       
-      <!-- Presentación Principal -->
       <div class="text-center mb-10 sm:mb-14">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
           ¿Quiénes somos?
         </h1>
       </div>
 
-      <!-- Resumen de Identidad -->
       <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 lg:p-10 shadow-sm mb-12 sm:mb-16">
         <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
           <strong class="text-gray-900">ERGOS PROJECT</strong> es una asociación de estudiantes sin fines de lucro que hacen vida dentro de la Escuela de Ingeniería Industrial, perteneciente a la Facultad de Ingeniería de la Universidad de Carabobo.
@@ -325,7 +336,6 @@
         </p>
       </div>
 
-      <!-- Orden de Prioridades -->
       <div class="mb-12 sm:mb-16">
         <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-2">ORDEN DE PRIORIDADES</h2>
         <p class="text-sm sm:text-base text-gray-600 mb-8 leading-relaxed max-w-4xl">
@@ -414,7 +424,6 @@
         </ol>
       </div>
 
-      <!-- Botón de regreso -->
       <div class="text-center">
         <button onclick="showSection('inicio')" class="px-7 py-3 bg-gray-900 hover:bg-black text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer">
           ← Volver a la página principal
@@ -428,7 +437,6 @@
   <main id="view-servicios" class="flex-grow w-full hidden">
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
       
-      <!-- Presentación Principal -->
       <div class="text-center mb-10 sm:mb-14">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-4">
           Servicios y Gestión
@@ -438,7 +446,6 @@
         </p>
       </div>
 
-      <!-- Cuadrícula de Servicios -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
         <!-- Servicio 1 -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
@@ -509,7 +516,6 @@
         </div>
       </div>
 
-      <!-- Tarjeta CTA de Servicios -->
       <div class="bg-gray-900 text-white rounded-2xl p-6 sm:p-8 md:p-10 text-center">
         <h2 class="text-xl sm:text-2xl font-bold mb-2">¿Deseas postular un área o colaborar en la ejecución?</h2>
         <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-6 leading-relaxed">
@@ -533,160 +539,7 @@
     <p>Ergos Project © 2026 • Escuela de Ingeniería Industrial</p>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script>
-    // Control de navegación entre Inicio, ¿Quiénes somos? y Servicios
-    function showSection(sectionId) {
-      const viewInicio = document.getElementById('view-inicio');
-      const viewQuienes = document.getElementById('view-quienes-somos');
-      const viewServicios = document.getElementById('view-servicios');
-
-      const btnInicio = document.getElementById('btn-nav-inicio');
-      const btnQuienes = document.getElementById('btn-nav-quienes');
-      const btnServicios = document.getElementById('btn-nav-servicios');
-
-      const mBtnInicio = document.getElementById('m-btn-inicio');
-      const mBtnQuienes = document.getElementById('m-btn-quienes');
-      const mBtnServicios = document.getElementById('m-btn-servicios');
-
-      // Ocultar todas las vistas
-      viewInicio.classList.add('hidden');
-      viewQuienes.classList.add('hidden');
-      viewServicios.classList.add('hidden');
-
-      // Resetear clases activas de escritorio
-      [btnInicio, btnQuienes, btnServicios].forEach(btn => {
-        if (btn) {
-          btn.classList.remove('bg-gray-100', 'text-gray-900');
-          btn.classList.add('text-gray-600');
-        }
-      });
-
-      // Resetear clases activas de móvil
-      [mBtnInicio, mBtnQuienes, mBtnServicios].forEach(btn => {
-        if (btn) {
-          btn.classList.remove('bg-gray-100', 'text-gray-900');
-          btn.classList.add('text-gray-600');
-        }
-      });
-
-      // Activar vista solicitada
-      if (sectionId === 'quienes-somos') {
-        viewQuienes.classList.remove('hidden');
-        btnQuienes.classList.add('bg-gray-100', 'text-gray-900');
-        btnQuienes.classList.remove('text-gray-600');
-        if (mBtnQuienes) {
-          mBtnQuienes.classList.add('bg-gray-100', 'text-gray-900');
-          mBtnQuienes.classList.remove('text-gray-600');
-        }
-      } else if (sectionId === 'servicios') {
-        viewServicios.classList.remove('hidden');
-        btnServicios.classList.add('bg-gray-100', 'text-gray-900');
-        btnServicios.classList.remove('text-gray-600');
-        if (mBtnServicios) {
-          mBtnServicios.classList.add('bg-gray-100', 'text-gray-900');
-          mBtnServicios.classList.remove('text-gray-600');
-        }
-      } else {
-        viewInicio.classList.remove('hidden');
-        btnInicio.classList.add('bg-gray-100', 'text-gray-900');
-        btnInicio.classList.remove('text-gray-600');
-        if (mBtnInicio) {
-          mBtnInicio.classList.add('bg-gray-100', 'text-gray-900');
-          mBtnInicio.classList.remove('text-gray-600');
-        }
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Desplazamiento confiable a Canales de Colaboración
-    function irAColaboracion() {
-      const viewInicio = document.getElementById('view-inicio');
-      if (viewInicio.classList.contains('hidden')) {
-        showSection('inicio');
-      }
-      setTimeout(() => {
-        const target = document.getElementById('colaboracion');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 80);
-    }
-
-    // Control de Drawer Móvil
-    function toggleMobileMenu(abrir) {
-      const drawer = document.getElementById('mobile-drawer');
-      const backdrop = document.getElementById('drawer-backdrop');
-      const container = document.getElementById('drawer-container');
-
-      if (abrir) {
-        container.classList.remove('pointer-events-none');
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-        drawer.classList.remove('translate-x-full');
-        drawer.classList.add('translate-x-0');
-      } else {
-        backdrop.classList.remove('opacity-100');
-        backdrop.classList.add('opacity-0');
-        drawer.classList.remove('translate-x-0');
-        drawer.classList.add('translate-x-full');
-        setTimeout(() => {
-          container.classList.add('pointer-events-none');
-        }, 300);
-      }
-    }
-
-    // Copiado al portapapeles con fallback robusto
-    function copiarDatosPago(btn) {
-      const datos = "Banco: Mercantil\nC.I.: 30.682.297\nTeléfono: 0412-8829844";
-      copiarTextoUniversal(datos, btn, "¡Copiado con éxito!");
-    }
-
-    function copiarInstagram(btn) {
-      copiarTextoUniversal("@ergosproject", btn, "¡Usuario copiado!");
-    }
-
-    function copiarTextoUniversal(texto, elemento, mensajeExito) {
-      const textoOriginal = elemento.innerText;
-      
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(texto).then(() => {
-          mostrarFeedback(elemento, textoOriginal, mensajeExito);
-        }).catch(() => {
-          fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
-        });
-      } else {
-        fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito);
-      }
-    }
-
-    function fallbackCopiaManual(texto, elemento, textoOriginal, mensajeExito) {
-      try {
-        const areaTemp = document.createElement("textarea");
-        areaTemp.value = texto;
-        areaTemp.style.position = "fixed";
-        areaTemp.style.left = "-9999px";
-        areaTemp.style.top = "0";
-        document.body.appendChild(areaTemp);
-        areaTemp.focus();
-        areaTemp.select();
-        document.execCommand('copy');
-        document.body.removeChild(areaTemp);
-        mostrarFeedback(elemento, textoOriginal, mensajeExito);
-      } catch (err) {
-        alert("Información para transferir:\n" + texto);
-      }
-    }
-
-    function mostrarFeedback(elemento, original, nuevo) {
-      elemento.innerText = nuevo;
-      elemento.classList.add('bg-emerald-600');
-      setTimeout(() => {
-        elemento.innerText = original;
-        elemento.classList.remove('bg-emerald-600');
-      }, 2200);
-    }
-  </script>
+  <!-- Lógica JavaScript Separada -->
+  <script src="js/app.js"></script>
 </body>
 </html>
